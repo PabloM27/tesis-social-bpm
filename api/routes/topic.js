@@ -7,6 +7,8 @@ var TopicController = require('../controller/topic');
 
 var api = express.Router();
 
-api.post('/topic',TopicController.createTopic);  
+api.post('/topic',TopicController.createTopic);
+api.get('/topic/:id',TopicController.readTopic);  
+api.get('/topics/:page?',TopicController.readTopics);
 
 module.exports = api;

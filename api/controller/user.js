@@ -4,7 +4,7 @@
 
 //libreria para cifrar contraseñas
 var bcrypt = require('bcrypt-nodejs');
-//var mongoosePaginate =require('mongoose-pagination');
+var mongoosePaginate =require('mongoose-pagination');
 
 //libreria de filesistem
 var fs = require('fs');
@@ -13,7 +13,7 @@ var pathLibray = require('path');
 //UserSchema lo da el ORM permit
 var User = require('../model/user');
 
-//var jwtService = require('../services/jwt');
+var jwtService = require('../services/jwt');
 //CONSTANTES
 //const USERS_FILE_PATH='./uploads/users/';
 
@@ -84,11 +84,96 @@ function doCreateUser(p){
 	});
 }
 
+/*
+Login de usuario
+*/
+
+/*
+Login de usuario
+*/
+function loginUser(req,res){
+	var params = req.body;
+	var email = params.email;
+	var nick = params.nick;
+	var password = params.password;
+	User.findOne({email:email},(err,readUser)=>{
+		if(err)return res.status(500).send({message:'Error en la peticion'});
+
+		if(readUser){
+			bcrypt.compare(password,readUser.password,(err,check)=>{
+				if(check){
+					if(params.gettoken){
+						//generar y retornar token
+						return res.status(200).send({
+							token: jwtService.createToken(readUser)
+						});
+					}else{
+						//retonar datos de usuario
+						readUser.password = undefined;
+						return res.status(200).send({readUser});
+					}	
+				}else{
+					return res.status(404).send({message:'Error usuario o password incorrecta'});
+				}
+			})
+		}else{
+			return res.status(404).send({message:'Error el usuario no se pudo identificar!'});
+		}
+	});
+}
+
+
+/*Lee usuario */
+
+function readUser(req,res){
+	var userId = req.params.id;
+
+	User.findById(userId,(err,userRead) =>{
+		if(err) return res.status(500).send({message: 'Error en la peticion'});
+
+		if(!userRead) return res.status(404).send({message:'El usuario no existe'});
+		//no enviamos la pass al cliente
+		userRead.password =  undefined;
+		return res.status(200).send({user:userRead});		
+	})
+}
+
+
+
+/*Retorna usuarios paginados */
+
+function readUsers(req,res){
+	//var identity_user_id = req.user.sub;
+	var page = 1;
+	if(req.params.page){
+		page = req.params.page; 
+	}
+	var itemsPerPage = 3;
+	//recuperamosa todos,pero no enviamos la pass
+	User.find({},{password:0}).sort('_id').paginate(page,itemsPerPage,(err,users,total)=>{
+		if(err) return res.status(500).send({message: 'Error en la peticion'});
+
+		if(!users) return res.status(500).send({message: 'No hay usuarios disponibles'});
+
+		//llama a funcion asincronica
+	
+		return res.status(200).send({ //podria usar usersenviados: users , si no pongo nada tomo el mismo
+					users,
+					total,		
+					pages: Math.ceil(total/itemsPerPage)
+		});	
+	});
+}
+
+
 
 //publico las funciones del controlador
 module.exports = {
 	home,
+	loginUser,
 	saveUser,
+	readUser,
+	readUsers
 }
 
 

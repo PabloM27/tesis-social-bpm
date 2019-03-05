@@ -7,6 +7,8 @@ var MessageController = require('../controller/message');
 
 var api = express.Router();
 
-api.post('/message',MessageController.createMessage);  
+api.post('/message',MessageController.createMessage); 
+api.get('/message/:id',MessageController.readMessage);  
+//api.get('/message/:page?',MessageController.readMessages);
 
 module.exports = api;

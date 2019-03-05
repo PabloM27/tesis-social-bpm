@@ -15,9 +15,6 @@ function createMessage(req, res) {
         message.emitter = params.emitter;
 		//creo el mensaje
 	    doCreateMessage({ message: message, params: params, res: res });
-			
-	
-
 	} else {
 		res.status(200).send({
 			message: 'send all message fields'
@@ -49,7 +46,20 @@ function doCreateMessage(p) {
 }
 
 
+
+/*Lee Mensaje */
+function readMessage(req,res){
+	var messageId = req.params.id;
+	Message.findById(messageId,(err,messageRead) =>{
+		if(err) return res.status(500).send({message: 'Error en la peticion'});
+
+		if(!messageRead) return res.status(404).send({message:'El mensaje no existe'})
+		return res.status(200).send({message:messageRead});		
+	})
+}
+
 //publico las funciones del controlador
 module.exports = {
-	createMessage 
+	createMessage,
+	readMessage 
 }
