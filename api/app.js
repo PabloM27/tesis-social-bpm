@@ -7,10 +7,12 @@ var bodyParser = require('body-parser');
 var application = express();
 
 //cargar rutas
-/*var user_routes = require('./routes/user');
-var follow_routes = require('./routes/follow');
-var publication_routes = require('./routes/publication');
-var message_routes = require('./routes/message')*/
+var user_routes = require('./routes/user');
+var hashtag_routes = require('./routes/hashtag');
+var message_routes = require('./routes/message');
+var topic_routes = require('./routes/topic');
+var process_routes = require('./routes/process');
+var activity_routes = require('./routes/activity');
 
 //middlewares 
 application.use(bodyParser.urlencoded({extended:false}));
@@ -34,10 +36,15 @@ application.get('/',(req,res)=>{
         message:'Hello World'
     });
 });
-/*application.use('/api',user_routes);
-application.use('/api',follow_routes);
-application.use('/api',publication_routes);
-application.use('/api',message_routes);*/
+
+application.use('/api',user_routes);
+application.use('/api',hashtag_routes);
+application.use('/api',message_routes);
+application.use('/api',topic_routes);
+application.use('/api',process_routes);
+application.use('/api',activity_routes);
+
+
 
 //exportar
 module.exports = application;
