@@ -2,24 +2,25 @@
 
 //var properties = require('mongoose');;
 
-const APP_NAME = "BPM-SOCIAL";
-const DB_NAME = "bpm_social";
+var context_properties = require('./properties');
 
-console.log("Starting "+APP_NAME);
+console.log("Starting "+context_properties.APP_NAME);
 //variable que usa dependica mongoose , orm para mongo
 var mongoose= require('mongoose');
-//variable que usa dependica a app maneja las peticiones http y el enrutamiento
-//var application = require('./app');
+//variable que usa dependencia a app maneja las peticiones http y el enrutamiento
+var application = require('./app');
 var port = 3800;
 
-//conectaronos a la base datos
+//conextion to DDB
 mongoose.Promise = global.Promise;
 //,{useMongoClient:true}
-mongoose.connect('mongodb://localhost:27017/'+DB_NAME)
+mongoose.connect('mongodb://localhost:27017/'+context_properties.DB_NAME)
 		.then(() => {
-			console.log('Successful connection to DB '+DB_NAME);
+			console.log('Successful connection to DB '+context_properties.DB_NAME);
 			//crear servidor
-			//application.listen(3800);
+			application.listen(3800,()=>{
+                console.log("servidor okkkk");
+            });
 			console.log("Server running Successful ok");
 			
 		})
