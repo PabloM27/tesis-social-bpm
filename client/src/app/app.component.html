@@ -13,16 +13,28 @@
           </a>
         </li>
       </ul>
-      <ul class="nav navbar-nav" >
+      <ul class="nav navbar-nav"  *ngIf="!identity" >
            <li>
             <a >
                 <span class="glyphicon glyphicon-log-in"></span>
                Login
              </a>
           </li> 
-      </ul>    
+      </ul>
+      <ul class="nav navbar-nav"  *ngIf="identity" >
+           <li>
+              <a >
+                  <a (click)="logout()"><span class="glyphicon glyphicon-log-out"></span>Cerrar Sesion</a>
+               </a>
+          </li> 
+      </ul>
+      <ul class="nav navbar-nav pull-right"  *ngIf="identity">
+        <user></user>     
+      </ul> 
     </div>
   </nav>
-<div>
-
+<div *ngIf="!identity">
+   <login></login>
+</div>
 <router-outlet></router-outlet>
+

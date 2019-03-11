@@ -31,11 +31,12 @@ export class LoginComponent implements OnInit{
 	}
 
 	onSubmit(){
-		//logear al usuario y conseguir sus datos
+		//logear
 		//console.log(this.user);
 		this._userService.signup(this.user).subscribe(
 			response=>{
 				console.log('usuario logeado con exito');
+				console.log(response);
 				this.identity = response.readUser;
 				if(!this.identity || !this.identity._id ){
 					this.status = 'error';
@@ -74,9 +75,12 @@ export class LoginComponent implements OnInit{
 					localStorage.setItem('token',this.token);
 
 					//conseguir las estadisticas del usr
-					this.getCounters();
-					
-					
+					//this.getCounters();
+					//recien cuando ejecuto esto , el componente pasa a estado succes
+					localStorage.setItem('stats',JSON.stringify(response));
+					this.status = 'success'
+					this._router.navigate(['/']);
+							
 				}
 			},
 			error =>{

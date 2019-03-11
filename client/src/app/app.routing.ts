@@ -9,8 +9,6 @@ import { LoginComponent } from './components/login/login.component';
 
 
 const appRoutes: Routes = [
-{path:'',component:LoginComponent},
-{path:'home',component:LoginComponent},
 {path:'login',component:LoginComponent}
 ];
 

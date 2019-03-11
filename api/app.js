@@ -6,6 +6,8 @@ var bodyParser = require('body-parser');
 //variable que representa la app (abstrae ,http, enrutamientos)
 var application = express();
 
+
+
 //cargar rutas
 var user_routes = require('./routes/user');
 var hashtag_routes = require('./routes/hashtag');
@@ -23,13 +25,11 @@ application.use(bodyParser.json());
 // configurar cabeceras http , esto sirve para que los requerimientos se validen solo a lo declarado en el metodo
 // le da mas seguridad
 
-/*application.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+application.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, authorization");
     next();
-})*/
+})
 
 //rutas
 application.get('/',(req,res)=>{
