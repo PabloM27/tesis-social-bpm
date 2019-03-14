@@ -9,6 +9,7 @@ import{routing,appRoutingProviders} from './app.routing';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/user/user.component';
+import { ProcessComponent } from './components/process/process.component';
 
 //servicios
 import {UserService} from './services/user.service';
@@ -18,7 +19,8 @@ import {UserService} from './services/user.service';
   declarations: [
     AppComponent,
     LoginComponent,
-    UserComponent
+    UserComponent,
+    ProcessComponent
   ],
   imports: [
     BrowserModule,

@@ -28,7 +28,7 @@ export class AppComponent implements OnInit, DoCheck {
   ngOnInit(){
   	this.identity = this._userService.getIdentity();
   	//la identidad cacheada es 
-  	console.log(this.identity)
+  	//console.log(this.identity)
   }
 
   //cada vez que se produce un cambio en la app se ejecuta este evento

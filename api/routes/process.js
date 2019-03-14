@@ -8,5 +8,6 @@ var ProcessController = require('../controller/process');
 var api = express.Router();
 
 api.post('/process',ProcessController.createProcess);  
+api.get('/process/:id',ProcessController.readProcess);  
 
 module.exports = api;
