@@ -1,4 +1,4 @@
-export class User{
+export class Topic{
 	constructor(
 		public _id: string,
 		public title:string,

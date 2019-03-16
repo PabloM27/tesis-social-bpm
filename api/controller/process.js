@@ -14,7 +14,9 @@ function createProcess(req, res) {
         process.title = params.title;
         process.description = params.description;
         process.idProcessBPM = params.idProcessBPM;
-        process.idVersionBPM = params.idVersionBPM;
+		process.idVersionBPM = params.idVersionBPM;
+		process.topics = params.topics;
+		
 		//falta validar que no exita mismo id
 	    doCreateProcess({ process: process, params: params, res: res });
 

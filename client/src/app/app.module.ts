@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/user/user.component';
 import { ProcessComponent } from './components/process/process.component';
+import { TopicComponent } from './components/topic/topic.component';
 
 //servicios
 import {UserService} from './services/user.service';
@@ -20,7 +21,8 @@ import {UserService} from './services/user.service';
     AppComponent,
     LoginComponent,
     UserComponent,
-    ProcessComponent
+    ProcessComponent,
+    TopicComponent
   ],
   imports: [
     BrowserModule,
