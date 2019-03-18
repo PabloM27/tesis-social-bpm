@@ -6,7 +6,7 @@ var Activity = require('../model/activity');
 var moment = require('moment');
 
 /*Crea nueva actividad*/
-//un cambio
+//un cambiooo
 
 function createActivity(req, res) {
 	var params = req.body;
