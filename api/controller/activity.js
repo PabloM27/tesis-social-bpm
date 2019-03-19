@@ -7,7 +7,7 @@ var moment = require('moment');
 
 /*Crea nueva actividad*/
 //un cambiooo mas
-
+//este un cambio en git
 function createActivity(req, res) {
 	var params = req.body;
 	if (validateActiviyCreate(params)) {
