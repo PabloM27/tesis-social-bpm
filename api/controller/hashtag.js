@@ -1,7 +1,7 @@
 'use strict'
 
 //CONTROLADOR DE HASHTAG - SERVICIO DE HASHTAG
-
+//CONTROLADOR DE HASHTAG - SERVICIO DE HASHTAG
 
 //UserSchema lo da el ORM permit
 var HashTag = require('../model/hashtag');
