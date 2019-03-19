@@ -8,6 +8,7 @@ var moment = require('moment');
 /*Crea nueva actividad*/
 /*Crea nueva actividad*/
 /*Crea nueva actividad*/
+/*Crea nueva actividad*/
 function createActivity(req, res) {
 	var params = req.body;
 	if (validateActiviyCreate(params)) {
