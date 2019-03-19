@@ -1,7 +1,7 @@
 'use strict'
 
 //CONTROLADOR DE ActiviAty - SERVICIO DE Activity
-
+//CONTROLADOR DE ActiviAty - SERVICIO DE Activity
 var Activity = require('../model/activity');
 var moment = require('moment');
 
