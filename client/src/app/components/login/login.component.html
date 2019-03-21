@@ -9,7 +9,7 @@
 
 <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-5">
 	<p>
-		<label> Corre electronico</label>
+		<label> Corre electronico: </label>
 		<input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required />
 		<span *ngIf="!email.valid && email.touched">
 			El email no es valido
