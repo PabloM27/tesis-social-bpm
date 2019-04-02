@@ -7,4 +7,9 @@
                     </div>
          </div>
 </div>
+<div *ngIf="process">
+    <div  *ngFor="let topic_id of process.topics" >
+       <topic *ngIf="topic_id" [topic_id]="topic_id"></topic>
+    </div >
+</div >
 <div class="clearfix"></div>

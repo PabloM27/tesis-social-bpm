@@ -5,6 +5,7 @@ export class User{
 		public surname:string,
 		public nick:string,
 		public email:string,
+		public password:string,
 		public role:string,
 		public image:string,
 		public created_at:string,

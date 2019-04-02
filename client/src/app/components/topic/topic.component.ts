@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core';
+import {Component,OnInit,Input } from '@angular/core';
 import {Router,ActivatedRoute,Params} from '@angular/router';
 import {User} from '../../models/user';
 import {Topic} from '../../models/topic';
@@ -13,6 +13,9 @@ import {GLOBAL} from '../../services/global';
 })
 
 export class TopicComponent implements OnInit{
+
+	@Input() topic_id: string = '';
+
 	public user:User;
 	public title:string;
 	public identity;
@@ -35,6 +38,7 @@ export class TopicComponent implements OnInit{
 
 	ngOnInit(){
 		console.log("topic.component ha sido cargadooo");
+		console.log("me llego el id al topico "+this.topic_id);
 		this.loadTopicData();	
 	}
 
@@ -43,7 +47,7 @@ export class TopicComponent implements OnInit{
 	}
 
 	getTopic(){
-		this._topicService.getTopic("5c89c24be16e601a20743155").subscribe(
+		this._topicService.getTopic(this.topic_id).subscribe(
 			response =>{
 				if(response.topic){
                     console.log("el topico leido es");

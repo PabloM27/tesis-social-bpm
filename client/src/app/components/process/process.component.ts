@@ -42,22 +42,31 @@ export class ProcessComponent implements OnInit{
 		this.getProcess();	
 	}
 
-	getProcess(){
-		this._processService.getProcess("5c89c2a8e16e601a20743157").subscribe(
+	getProcess(){			
+		this._route.params.subscribe(params =>{
+		var idProcess = params['idprocess'];
+		console.log("parametros")
+		console.log(params);	
+		/*if(!params['idprocess']){
+				idProcess = "5c959adbb9a09c23c083c1e7";
+		}*/
+		console.log("el ide es"+idProcess);
+
+		this._processService.getProcess(idProcess).subscribe(
 			response =>{
-				if(response.process){
-                    console.log("el proceso leido es");
-                    console.log(response.process);
-					this.process = response.process;
-				}else{
-					this.status = 'error';
-				}
+					if(response.process){
+						console.log("el proceso leido es");
+						console.log(response.process);
+						this.process = response.process;
+					}else{
+						this.status = 'error';
+					}
 			},
 			error =>{
 				console.log(<any>error);
 				this._router.navigate(['/']);
 			}
-		)
-
+		)						
+		})
 	}
 }

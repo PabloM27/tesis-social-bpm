@@ -57,9 +57,25 @@ function doCreateProcess(p) {
 function readProcess(req,res){
 	var processId = req.params.id;
 
-	Process.findById(processId,(err,processRead) =>{
-		if(err) return res.status(500).send({message: 'Error en la peticion'});
+	Process.findOne({idProcessBPM:processId},(err,processRead) =>{
+		if(err) {
+			console.log(err);
+			return res.status(500).send({message: 'Error en la peticion'});
+		}
+		if(!processRead) return res.status(404).send({message:'El proceso no existe'})
+		return res.status(200).send({process:processRead});		
+	})
+}
 
+/*Lee process */
+function readProcessById(req,res){
+	var processId = req.params.id;
+
+	Process.findById(processId,(err,processRead) =>{
+		if(err) {
+			console.log(err);
+			return res.status(500).send({message: 'Error en la peticion'});
+		}
 		if(!processRead) return res.status(404).send({message:'El proceso no existe'})
 		return res.status(200).send({process:processRead});		
 	})

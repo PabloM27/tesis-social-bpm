@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit{
 	){
 		this.title="Identificate";
 		//this.user = new User("","juan","perez","juancho","pablo@gmail.com","","","gettoken");
-		this.user = new User("","","","","","ROLE_USER","","");
+		this.user = new User("","","","","","","ROLE_USER","","");
 	}
 	ngOnInit(){
 		console.log('componente login cargado');
