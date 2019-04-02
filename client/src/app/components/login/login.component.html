@@ -9,14 +9,14 @@
 
 <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-5">
 	<p>
-		<label> Corre electronico</label>
+		<label> Corre electronico: </label>
 		<input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required />
 		<span *ngIf="!email.valid && email.touched">
 			El email no es valido
 		</span>
 	</p>
 	<p>
-		<label> Contraseña</label>
+		<label> Contraseña: </label>
 		<input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required />
 		<span *ngIf="!password.valid && password.touched">
 			La contraseña es obligatoria
