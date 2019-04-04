@@ -13,7 +13,8 @@ function createTopic(req, res) {
         var topic = new Topic();
         topic.title = params.title;
         topic.description = params.description;
-        topic.owner =  params.owner;
+		topic.owner =  params.owner;
+		topic.comments = params.comments;
         //faltan crear los msj del topico
 	    doCreateTopic({ topic: topic, params: params, res: res });
 
@@ -64,6 +65,19 @@ function readTopic(req,res){
 }
 
 
+/*Lee Topico populado */
+function readTopicFull(req,res){
+	var topicId = req.params.id;
+
+	Topic.findById(topicId,(err,topicRead) =>{
+		if(err) return res.status(500).send({message: 'Error en la peticion'});
+
+		if(!topicRead) return res.status(404).send({message:'El topico no existe'})
+		return res.status(200).send({topic:topicRead});		
+	}).populate('comments');
+}
+
+
 /*Lee los topicos paginados */
 /*Retorna usuarios paginados */
 
@@ -92,5 +106,6 @@ function readTopics(req,res){
 module.exports = {
 	createTopic,
 	readTopic,
+	readTopicFull,
 	readTopics
 }

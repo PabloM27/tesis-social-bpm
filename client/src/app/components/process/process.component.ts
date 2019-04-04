@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core';
+import {Component,OnInit,EventEmitter,Output} from '@angular/core';
 import {Router,ActivatedRoute,Params} from '@angular/router';
 import {User} from '../../models/user';
 import {Process} from '../../models/process';
@@ -19,7 +19,9 @@ export class ProcessComponent implements OnInit{
 	public token;
 	public status:string;
     public url;
-    public process:Process;
+	public process:Process;
+	//Output
+	@Output() eventEmmiterProcess = new EventEmitter();
 	
 	constructor(
 		private _route:ActivatedRoute,
@@ -34,7 +36,7 @@ export class ProcessComponent implements OnInit{
 	}
 
 	ngOnInit(){
-		console.log("process.component ha sido cargadooo");
+		console.log("process.componenet ha sido cargadooo");
 		this.loadProcessData();	
 	}
 
@@ -58,6 +60,7 @@ export class ProcessComponent implements OnInit{
 						console.log("el proceso leido es");
 						console.log(response.process);
 						this.process = response.process;
+						this.eventEmmiterProcess.emit({readProcess:this.process});
 					}else{
 						this.status = 'error';
 					}

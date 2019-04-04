@@ -23,6 +23,15 @@ export class TopicService{
 		let headers =  new HttpHeaders().set('Content-Type','application/json');
 		return this._http.get(this.url+'topic/'+id,{headers:headers});
 	}
+
+	getTopicFull(id):Observable<any>{
+
+    //http://localhost:3800/api/process/5c7d78dda22f2a0f14fc2a2c
+		let headers =  new HttpHeaders().set('Content-Type','application/json');
+		return this._http.get(this.url+'topic/'+id,{headers:headers});
+	}
+
+	
 	
     
 }

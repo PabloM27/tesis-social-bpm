@@ -10,6 +10,7 @@ var TopicSchema = Schema({
     title:String,
     description:String,
     messages : [{ type: Schema.Types.ObjectId, ref: 'Message' }],
+    comments : [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
     owner:{type: Schema.ObjectId,ref: 'User'},
     created_at:String,
     updated_at:String

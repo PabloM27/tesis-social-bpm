@@ -16,6 +16,7 @@ var topic_routes = require('./routes/topic');
 var process_routes = require('./routes/process');
 var activity_routes = require('./routes/activity');
 var publication_routes = require('./routes/publication');
+var comment_routes = require('./routes/comment');
 
 //middlewares 
 application.use(bodyParser.urlencoded({extended:false}));
@@ -45,6 +46,8 @@ application.use('/api',topic_routes);
 application.use('/api',process_routes);
 application.use('/api',activity_routes);
 application.use('/api',publication_routes);
+application.use('/api',comment_routes);
+
 
 
 //exportar

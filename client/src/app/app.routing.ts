@@ -7,11 +7,12 @@ import {Routes,RouterModule} from '@angular/router';
 //componentes
 import { LoginComponent } from './components/login/login.component';
 import { ProcessComponent } from './components/process/process.component';
+import { ProcessTopicsComponent } from './components/process-topics/process-topics.component';
 
 const appRoutes: Routes = [
 {path:'login',component:LoginComponent},
-{path:'process-topics/',component:ProcessComponent},
-{path:'process-topics/:idprocess',component:ProcessComponent}
+{path:'process-topics',component:ProcessTopicsComponent},
+{path:'process-topics/:idprocess',component:ProcessTopicsComponent}
 ];
 
 export const appRoutingProviders: any [] = [];

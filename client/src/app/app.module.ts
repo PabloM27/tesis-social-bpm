@@ -14,6 +14,9 @@ import { TopicComponent } from './components/topic/topic.component';
 
 //servicios
 import {UserService} from './services/user.service';
+import { ProcessTopicsComponent } from './components/process-topics/process-topics.component';
+import { TopicCommentsComponent } from './components/topic-comments/topic-comments.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import {UserService} from './services/user.service';
     LoginComponent,
     UserComponent,
     ProcessComponent,
-    TopicComponent
+    TopicComponent,
+    ProcessTopicsComponent,
+    TopicCommentsComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

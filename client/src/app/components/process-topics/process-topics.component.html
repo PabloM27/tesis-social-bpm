@@ -1,0 +1,20 @@
+<div *ngIf="!selectedTopic" class="col-lg-12">
+  <h1  >Topicos del Proceso</h1>
+  <process (eventEmmiterProcess)="refreshProcessOutPut($event)" ></process>
+  <div *ngIf="process" class="col-xs-12"> 
+      <div  *ngFor="let topic_id of process.topics"   >
+        <div class="col-xs-8">
+            <topic *ngIf="topic_id" [topic_id]="topic_id"></topic>
+        </div> 
+        <div class="col-xs-4">
+            <button class="btn btn-success" 
+						(click)="showTopic(topic_id)" > Ver Topico</button>
+        </div>     
+      </div >
+  </div >
+</div >
+<div *ngIf="selectedTopic" class="col-lg-12">
+    <h1  >Topico seleccionado</h1>
+    <app-topic-comments *ngIf="selectedTopic" [topic_selected_id]="selectedTopic" ></app-topic-comments>
+</div>
+<div class="clearfix"></div>
