@@ -9,6 +9,7 @@ import {GLOBAL} from '../../services/global';
 @Component({
 	selector: 'topic',
 	templateUrl:'./topic.component.html',
+	styleUrls: ['./topic.component.css'],
 	providers:[UserService,TopicService]
 })
 

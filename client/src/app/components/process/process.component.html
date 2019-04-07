@@ -1,10 +1,10 @@
-<div class="col-lg-8">
+<div class="col-lg-8" *ngIf="process">
         <div  class="" >
                 <div class="">
                     <div class="panel-body " >                    
-                            Proceso : <a *ngIf="process" hred="#">{{process.title}}</a>				  
+                            <h4 *ngIf="process" hred="#"> {{process.title}}</h4>				  
                         </div>	
                     </div>
-         </div>
+</div>
 </div>
 <div class="clearfix"></div>

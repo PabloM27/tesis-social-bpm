@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import{HttpClientModule} from '@angular/common/http';
 import{routing,appRoutingProviders} from './app.routing';
-
+import {MomentModule} from 'angular2-moment';
 
 //componenets
 import { AppComponent } from './app.component';
@@ -34,7 +34,8 @@ import { CommentComponent } from './components/comment/comment.component';
     BrowserModule,
     FormsModule,
     routing,
-    HttpClientModule
+    HttpClientModule,
+    MomentModule
   ],
   providers: [appRoutingProviders,UserService],
   bootstrap: [AppComponent]
