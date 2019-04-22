@@ -138,7 +138,17 @@ function readUser(req,res){
 	})
 }
 
+/*Retorna todos los usuarios sin paginar */
 
+function readAllUsers(req,res){
+	//recuperamosa todos,pero no enviamos la pass
+	User.find({},{password:0},(err,users)=>{
+		if(err) return res.status(500).send({message: 'Error en la peticion'});
+		if(!users) return res.status(500).send({message: 'No hay usuarios disponibles'});
+		//llama a funcion asincronica
+		return res.status(200).send({users});	
+	});
+}
 
 /*Retorna usuarios paginados */
 
@@ -152,11 +162,8 @@ function readUsers(req,res){
 	//recuperamosa todos,pero no enviamos la pass
 	User.find({},{password:0}).sort('_id').paginate(page,itemsPerPage,(err,users,total)=>{
 		if(err) return res.status(500).send({message: 'Error en la peticion'});
-
 		if(!users) return res.status(500).send({message: 'No hay usuarios disponibles'});
-
 		//llama a funcion asincronica
-	
 		return res.status(200).send({ //podria usar usersenviados: users , si no pongo nada tomo el mismo
 					users,
 					total,		
@@ -173,7 +180,8 @@ module.exports = {
 	loginUser,
 	saveUser,
 	readUser,
-	readUsers
+	readUsers,
+	readAllUsers
 }
 
 

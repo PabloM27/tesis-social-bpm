@@ -9,7 +9,9 @@ var moment = require('moment');
 
 function createActivityExecutor(req, res) {
 	var params = req.body;
+	//console.log(params);
 	if (validateActivityExecutorCreate(params)) {
+		//console.log("los datos ok!")
         var activityExecutor = new ActivityExecutor();
         activityExecutor.idProcessBPM = params.idProcessBPM;
         activityExecutor.processVersion = params.processVersion;
@@ -19,9 +21,9 @@ function createActivityExecutor(req, res) {
 		activityExecutor.idParticipant = params.idParticipant;
 		activityExecutor.state = "PENDING";
 		//creo el ActivityExecutorCreate
-	    doCreateActivityExecutorCreate({ activityExecutor: activityExecutor, params: params, res: res });
+	    doCreateActivityExecutor({ activityExecutor: activityExecutor, params: params, res: res });
 	} else {
-		res.status(200).send({
+		res.status(500).send({
 			message: 'send all ActivityExecutor fields'
 		});
 	}
@@ -34,7 +36,7 @@ function validateActivityExecutorCreate(p) {
 
 
 /*Crea ActivityExecutor pasado por parametro*/
-function doCreateActivityExecutorCreate(p) {
+function doCreateActivityExecutor(p) {
 	var activityExecutor = p.activityExecutor;
 	activityExecutor.created_at = moment().unix();
 	var params = p.params;
@@ -51,6 +53,46 @@ function doCreateActivityExecutorCreate(p) {
 }
 
 
+function updateActivityExecutor(req, res) {
+	var params = req.body;
+	if (validateActivityExecutorUpdate(params)) {
+		var activityExecutor = new ActivityExecutor();
+		activityExecutor._id =params._id;
+        activityExecutor.idProcessBPM = params.idProcessBPM;
+        activityExecutor.processVersion = params.processVersion;
+        activityExecutor.idActivityBPM = params.idActivityBPM;
+        activityExecutor.idCase = params.idCase;
+        activityExecutor.type = "USER";
+		activityExecutor.idParticipant = params.idParticipant;
+		activityExecutor.state = "PENDING";
+		//actualizo el ActivityExecutorCreate
+	    doUpdateActivityExecutor({ activityExecutor: activityExecutor, params: params, res: res });
+	} else {
+		res.status(500).send({
+			message: 'send all ActivityExecutor fields'
+		});
+	}
+}
+
+/*Actualiza ActivityExecutor pasado por parametro*/
+function doUpdateActivityExecutor(p) {
+	var activityExecutor = p.activityExecutor;
+	activityExecutor.updated_at = moment().unix();
+	var params = p.params;
+	var res = p.res;
+	ActivityExecutor.findByIdAndUpdate(activityExecutor._id,activityExecutor,{new:true},(err,activityExecutorUpdated)=>{
+		if(err) return res.status(500).send({message: 'Error actualizando activityExecutor'});
+		if(!activityExecutorUpdated) return res.status(500).send({message: 'No se encontro activityExecutorUpdated para actualizar'});	
+		return res.status(200).send({activityExecutor:activityExecutorUpdated});
+
+	})
+
+}
+
+/*valida los datos minimos para actualizar ActivityExecutor*/
+function validateActivityExecutorUpdate(p) {
+	return (p._id);
+}
 
 /*Lee ActivityExecutor */
 function readActivityExecutorById(req,res){
@@ -64,7 +106,7 @@ function readActivityExecutorById(req,res){
 	})
 }
 
-/*Lee ActivityExecutor */
+/*Lee ActivityExecutor para el caso consultado*/
 function readActivityExecutor(req,res){
 	//:idProcessBPM/:processVersion/:idCase/:idActivityBPM'
 	var params = req.params;
@@ -83,7 +125,8 @@ function readActivityExecutor(req,res){
 
 //publico las funciones del controlador
 module.exports = {
-    createActivityExecutor,
+	createActivityExecutor,
+	updateActivityExecutor,
     readActivityExecutorById,
 	readActivityExecutor
 }

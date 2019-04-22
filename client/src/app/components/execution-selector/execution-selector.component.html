@@ -1,0 +1,11 @@
+<div class="col-lg-4 form-group" >
+        <label *ngIf="!selectedUser">Selecciona ejecutor</label>
+        <label *ngIf="selectedUser">Ejecutor seleccionado</label>
+        <select class="form-control" [(ngModel)]="selectedUser" (change)="updateUser($event)">
+          <option *ngFor="let user of users" [ngValue]="user.nick">{{user.email}}</option>
+      </select>
+      <br>
+      <p><input type="submit" value="Confirmar" class="btn btn-success" (click)="setExecutor($event)" /></p>
+ 
+</div>
+<div class="clearfix"></div>

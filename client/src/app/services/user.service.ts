@@ -18,7 +18,7 @@ export class UserService{
 	}
 
 	register(user_to_register): Observable <any>{
-		console.log('se registra el usuario');
+		//console.log('se registra el usuario');
 		console.log(user_to_register)
 		console.log(this.url);
 		let params = JSON.stringify(user_to_register);
@@ -88,6 +88,13 @@ export class UserService{
 		return this._http.put(this.url+'update-user/'+user._id,paramas,{headers:headers});
 	}
 
+	/*Lee a todos los usuarios */
+	getAllUsers():Observable<any>{
+		let headers =  new HttpHeaders().set('Content-Type','application/json').set('Authorization',this.getToken());
+		return this._http.get(this.url+'users-all/',{headers:headers});
+	}
+
+	/*Lee a todos los por nro de pagina */
 	getUsers(page = null):Observable<any>{
 		let headers =  new HttpHeaders().set('Content-Type','application/json').set('Authorization',this.getToken());
 
@@ -96,7 +103,6 @@ export class UserService{
 
 	getUser(id):Observable<any>{
 		let headers =  new HttpHeaders().set('Content-Type','application/json').set('Authorization',this.getToken());
-
 		return this._http.get(this.url+'user/'+id,{headers:headers});
 	}
 

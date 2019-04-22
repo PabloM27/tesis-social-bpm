@@ -7,9 +7,9 @@ var WorkFlowController = require('../controller/workflow');
 
 var api = express.Router();
 
-api.post('/workflow-executor',WorkFlowController.createActivityExecutor);
+api.post('/workflow-executor',WorkFlowController.createActivityExecutor); 
+api.post('/workflow-executor-update/',WorkFlowController.updateActivityExecutor);
 api.get('/workflow-executor/:id',WorkFlowController.readActivityExecutorById);
-api.get('/workflow-executor/:idProcessBPM/:processVersion/:idCase/:idActivityBPM',WorkFlowController.readActivityExecutor);
-
+api.get('/workflow-executor/:idProcessBPM/:processVersion/:idActivityBPM/:idCase',WorkFlowController.readActivityExecutor);
 
 module.exports = api;

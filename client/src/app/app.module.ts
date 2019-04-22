@@ -17,7 +17,7 @@ import {UserService} from './services/user.service';
 import { ProcessTopicsComponent } from './components/process-topics/process-topics.component';
 import { TopicCommentsComponent } from './components/topic-comments/topic-comments.component';
 import { CommentComponent } from './components/comment/comment.component';
-
+import { ExecutionSelectorComponent } from './components/execution-selector/execution-selector.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import { CommentComponent } from './components/comment/comment.component';
     TopicComponent,
     ProcessTopicsComponent,
     TopicCommentsComponent,
-    CommentComponent
+    CommentComponent,
+    ExecutionSelectorComponent
   ],
   imports: [
     BrowserModule,
