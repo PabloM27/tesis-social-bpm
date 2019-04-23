@@ -1,5 +1,5 @@
 
-export class  Publication{
+export class  Publication{ //cambiar a ActivityComments
 	constructor(
 		public _id: string,
 		public text:string,
