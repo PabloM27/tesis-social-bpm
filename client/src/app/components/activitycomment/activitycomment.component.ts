@@ -15,7 +15,7 @@ export class ActivitycommentComponent implements OnInit {
   public idProcess: string = '5c91928d2f09871f0413654e';
   public idActivity: string = '5c91928d2f09871f0413654e';
   
-  @ViewChild('comment_') inputComment: ElementRef;
+ // @ViewChild('comment_') inputComment: ElementRef;
   public title;
   public identity;
   public token;
@@ -65,7 +65,7 @@ export class ActivitycommentComponent implements OnInit {
           response.activitycomment.emitter = this._userService.getIdentity();
           console.log(response.activitycomment);
           this.comments.push(response.activitycomment);
-          this.inputComment.nativeElement.value = "";
+         // this.inputComment.nativeElement.value = "";
           // agregarlo a la lista
         } else {
           //error

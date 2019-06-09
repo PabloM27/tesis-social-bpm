@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,ViewEncapsulation } from '@angular/core';
 import {Router,ActivatedRoute,Params} from '@angular/router';
 import {Process} from '../../models/process';
 import {Topic} from '../../models/topic';
@@ -13,6 +13,7 @@ import {GLOBAL} from '../../services/global';
   templateUrl: './process-topics.component.html',
   styleUrls: ['../../../styles.css','./process-topics.component.css'],
   providers:[UserService,ProcessService,TopicService]
+ /* encapsulation: ViewEncapsulation.Emulated*/
 })
 
 /*Componente para mostrar listado de topicos de un proceso

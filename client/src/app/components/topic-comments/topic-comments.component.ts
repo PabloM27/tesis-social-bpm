@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef,ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input,ViewEncapsulation,ElementRef , ViewChild, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Topic } from '../../models/topic';
 import { UserService } from '../../services/user.service';
@@ -14,9 +14,9 @@ import { MaterialModule } from '../../material.module';
 @Component({
   selector: 'app-topic-comments',
   templateUrl: './topic-comments.component.html',
-  styleUrls: ['./topic-comments.component.css'],
+  styleUrls: ['../../../styles.css','./topic-comments.component.css'],
   providers: [UserService, TopicService, CommentService],
-  encapsulation: ViewEncapsulation.Native
+ 
 })
 export class TopicCommentsComponent implements OnInit {
 
@@ -28,7 +28,7 @@ export class TopicCommentsComponent implements OnInit {
   public topic: Topic;
   public selectedTopic: Topic;
   public comments;
-  
+  //@ViewChild('comment_', {read: ElementRef}) private comment_: ElementRef;
   //@ViewChild('comment_') inputComment:ElementRef ;
 
   //@ViewChild('comment_') input: MatInput;
@@ -48,7 +48,7 @@ export class TopicCommentsComponent implements OnInit {
   ngOnInit() {
     console.log("topicComments.component ha sido cargadooo");
     console.log("llego el id del topico a cargar" + this.topic_selected_id);
-   // this.loadSession();
+    this.loadSession();
     this.loadTopicSelected();
 
     //to do leer el topico y mostar componente del topic y el listado 

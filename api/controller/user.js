@@ -94,10 +94,11 @@ Login de usuario
 Login de usuario
 */
 function loginUser(req, res) {
+    console.log(req.body);
     var params = req.body;
-    var email = params.email;
+    var email = "admin@gmail.com"; //params.email;
     var nick = params.nick;
-    var password = params.password;
+    var password = "demo"; //params.password;
     console.log("login hola ");
     console.log("login email " + params.email);
     console.log("login pass " + params.password);

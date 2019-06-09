@@ -12,10 +12,10 @@ var md_auth = require('../middelwares/authenticated');
 //var multipart = require('connect-multiparty');
 //var md_upload = multipart({uploadDir:'./uploads/users'}); 
 
-api.get('/home',UserController.home);
-api.post('/register',UserController.saveUser); 
-api.post('/login',UserController.loginUser);
-api.get('/user/:id',md_auth.ensureAuth,UserController.readUser); 
-api.get('/users/:page?',md_auth.ensureAuth,UserController.readUsers);
-api.get('/users-all/',UserController.readAllUsers);
+api.get('/home', UserController.home);
+api.post('/register', UserController.saveUser);
+api.post('/login', UserController.loginUser);
+api.get('/user/:id', UserController.readUser);
+api.get('/users/:page?', UserController.readUsers);
+api.get('/users-all/', UserController.readAllUsers);
 module.exports = api;
