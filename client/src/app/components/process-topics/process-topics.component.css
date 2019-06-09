@@ -1,0 +1,12 @@
+.modal-body {
+    height: calc(100% - 60px) !important;
+}
+
+.cont-btntopico {
+    float: right;
+}
+
+.btnback {
+    float: right;
+    right: 5px;
+}

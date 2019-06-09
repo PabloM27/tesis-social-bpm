@@ -12,7 +12,8 @@ function createComment(req, res) {
 	if (validateCommentCreate(params)) {
         var comment = new Comment();
         comment.text = params.text;
-        comment.emitter = params.emitter;
+		comment.emitter = params.emitter;
+		comment.topic = params.topic;
 		//creo el comentario
 	    doCreateComment({ comment: comment, params: params, res: res });
 			
@@ -27,7 +28,7 @@ function createComment(req, res) {
 
 /*valida los datos minimos para creacion de Comment*/
 function validateCommentCreate(p) {
-	return (p.text &&  p.emitter);
+	return (p.text &&  p.emitter && p.topic);
 }
 
 
@@ -61,8 +62,21 @@ function readComment(req,res){
 	})
 }
 
+/*Lee Comment */
+function readComments(req,res){
+	var topicID = req.params.id;
+	console.log("busca por : "+topicID);
+	Comment.find({topic: topicID}).exec((err, data) =>{
+		if(err) return res.status(500).send({message: 'Error en la peticion'});
+
+		if(!data) return res.status(404).send({message:'No existen comentarios'})
+		return res.status(200).send({comments:data});		
+	})
+}
+
 //publico las funciones del controlador
 module.exports = {
     createComment,
-    readComment
+	readComment,
+	readComments
 }

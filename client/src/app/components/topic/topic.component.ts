@@ -16,6 +16,7 @@ import {GLOBAL} from '../../services/global';
 export class TopicComponent implements OnInit{
 
 	@Input() topic_id: string = '';
+	@Input() public completo: string;
 
 	public user:User;
 	public title:string;
@@ -23,11 +24,12 @@ export class TopicComponent implements OnInit{
 	public token;
 	public status:string;
     public url;
-    public topic:Topic;
+	public topic:Topic;
+	public classcompleto:string;
 	
 	constructor(
-		private _route:ActivatedRoute,
-		private _router: Router,
+		//private _route:ActivatedRoute,
+		//private _router: Router,
         private _userService:UserService,
         private _topicService:TopicService,
 	){
@@ -39,7 +41,7 @@ export class TopicComponent implements OnInit{
 
 	ngOnInit(){
 		console.log("topic.component ha sido cargadooo");
-		console.log("me llego el id al topico "+this.topic_id);
+		console.log("me llego el id al topico "+this.topic_id+ " - "+ this.completo );
 		this.loadTopicData();	
 	}
 
@@ -60,7 +62,7 @@ export class TopicComponent implements OnInit{
 			},
 			error =>{
 				console.log(<any>error);
-				this._router.navigate(['/']);
+				//this._router.navigate(['/']);
 			}
 		)
 

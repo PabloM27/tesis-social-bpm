@@ -1,40 +1,12 @@
-<div class="col-lg-12" *ngIf="comment">
-  <div class="topwrap post beforepagination" >
-      <div class="userinfo pull-left">
-          <div class="avatar">
-              <img class ="img-avt" src="../../../assets/user-image.png" alt="">
-              <div class="status green">&nbsp;</div>
-          </div>
-  
-          <div class="icons">
-              <img src="../../../assets/icons/icon1.jpg" alt=""><img src="../../../assets/icons//icon4.jpg" alt=""><img src="../../../assets/icons//icon5.jpg" alt=""><img src="../../../assets/icons//icon6.jpg" alt="">
-          </div>
-      </div>
-      <div class="posttext pull-left">
-          <h2>admin@gmail.com</h2>
-          <p>{{comment.text}}</p>
-      </div>
-      <div class="clearfix"></div>
-  </div>
-  <div class="post postinfobot">
+<div class="cont-comment" *ngIf="comment">
+    <div class="cont-user-commnet">
+        <app-info-user [user]="comment.emitter"></app-info-user>
+    </div>
+    <div class="cont-fecha-comment">{{ (comment.created_at | amFromUnix) | amLocale:'es' | amTimeAgo}}</div>
 
-      <div class="likeblock pull-left">
-          <a  class="up"><i class="fa fa-thumbs-o-up"></i>10</a>
-          <a class="down"><i class="fa fa-thumbs-o-down"></i>1</a>
-      </div>
-
-      <div class="prev pull-left">                                        
-          <a ><i class="fa fa-reply"></i></a>
-      </div>
-
-      <div class="posted pull-left"><i class="fa fa-clock-o"></i> {{ (comment.created_at | amFromUnix) | amLocale:'es' | amTimeAgo}}</div>
-
-      <div class="next pull-right">                                        
-          <a ><i class="fa fa-share"></i></a>
-          <a><i class="fa fa-flag"></i></a>
-      </div>
-
-      <div class="clearfix"></div>
-  </div>
+    <div class="cont-right">
+        <div class="cont-name-user">{{comment.emitter.name}}</div>
+        <div class="cont-text-comment">{{comment.text}}</div>
+    </div>
 </div>
-<div class="clearfix"></div>
+<hr>

@@ -9,4 +9,5 @@ var api = express.Router();
 
 api.post('/comment',CommentController.createComment);  
 api.get('/comment/:id',CommentController.readComment);  
+api.get('/comments/:id',CommentController.readComments);  
 module.exports = api;

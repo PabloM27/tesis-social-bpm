@@ -15,7 +15,7 @@ import {GLOBAL} from '../../services/global';
 export class CommentComponent implements OnInit {
 
 
-	@Input() comment_id: string = '';
+	@Input() comment_object: Comment;
 
   public user:User;
 	public title:string;
@@ -26,7 +26,7 @@ export class CommentComponent implements OnInit {
 	public comment:Comment;
 
   constructor(
-		private _route:ActivatedRoute,
+		
 		private _router: Router,
     private _userService:UserService,
     private _commentService:CommentService,
@@ -42,13 +42,14 @@ export class CommentComponent implements OnInit {
   }
   
   loadCommentData(){			
-		this._route.params.subscribe(params =>{
+		this.comment = this.comment_object;
+	//	this._route.params.subscribe(params =>{
 		/*var idComment = params['idcomment'];
 		console.log("parametros")
 		console.log(params);	
 		console.log("el ide es"+idComment);*/
 		
-			if (this.comment_id) {
+		/*	if (this.comment_id) {
 				this._commentService.getComment(this.comment_id).subscribe(
 					response => {
 						if (response.comment) {
@@ -64,8 +65,8 @@ export class CommentComponent implements OnInit {
 						this._router.navigate(['/']);
 					}
 				)
-			}
-		})
+			}*/
+	//	})
 	}
 }
 

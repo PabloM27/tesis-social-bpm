@@ -56,8 +56,9 @@ function doCreateProcess(p) {
 /*Lee process */
 function readProcess(req,res){
 	var processId = req.params.id;
-
+	console.log(processId);
 	Process.findOne({idProcessBPM:processId},(err,processRead) =>{
+		console.log(processRead);
 		if(err) {
 			console.log(err);
 			return res.status(500).send({message: 'Error en la peticion'});

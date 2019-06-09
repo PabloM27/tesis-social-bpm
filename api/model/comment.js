@@ -12,6 +12,7 @@ var Schema  = mongoose.Schema;
 var CommentSchema = Schema({
     text:String,
     emitter:{type: Schema.ObjectId,ref: 'User'},
+    topic:{type: Schema.ObjectId,ref: 'Topic'},
     created_at:String
 })
 

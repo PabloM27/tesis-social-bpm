@@ -1,19 +1,50 @@
-<div *ngIf="!selectedTopic" class="col-lg-12">
-  <h3 *ngIf="process "  >Topicos del Proceso: {{process.title}}</h3>
-  <process (eventEmmiterProcess)="refreshProcessOutPut($event)" ></process>
-  <div *ngIf="process" class="col-xs-12"> 
-      <div  *ngFor="let topic_id of process.topics"   >
-        <div class="col-xs-10">
-            <topic *ngIf="topic_id" [topic_id]="topic_id"></topic>
-        </div> 
-        <div class="col-xs-2">
-            <button class="btn btn-success" 
-						(click)="showTopic(topic_id)" > Ver Topico</button>
-        </div>     
-      </div >
-  </div >
-</div >
-<div *ngIf="selectedTopic" class="col-lg-12">
-    <app-topic-comments *ngIf="selectedTopic" [topic_selected_id]="selectedTopic" ></app-topic-comments>
+<div>
+    <div class="btn-social text-center" data-toggle="modal" data-target="#myModal2">
+        <i class="glyphicon glyphicon-thumbs-up"></i>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel2">Topicos</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div *ngIf="!selectedTopic">
+                        <process [idProcess]="idProcess" (eventEmmiterProcess)="refreshProcessOutPut($event)"></process>
+                        <div *ngIf="process" class="">
+                            <div *ngFor="let topic_id of process.topics">
+                                <div class="cont-btntopico">
+                                    <button class="btn btn-success" (click)="showTopic(topic_id)">Ver</button>
+                                </div>
+                                <div class="">
+                                    <topic *ngIf="topic_id" [topic_id]="topic_id" [completo]="'false'"></topic>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="selectedTopic">
+                        <button class="btn btn-success btnback" (click)="backList()">Volver</button>
+                        <app-topic-comments *ngIf="selectedTopic" [topic_selected_id]="selectedTopic"></app-topic-comments>
+                    </div>
+                    <div class="clearfix"></div>
+
+                </div>
+
+
+            </div>
+            <!-- modal-content -->
+        </div>
+        <!-- modal-dialog -->
+    </div>
+    <!-- modal -->
+
+
 </div>
-<div class="clearfix"></div>
+<!-- container -->

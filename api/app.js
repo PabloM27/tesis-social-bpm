@@ -15,7 +15,7 @@ var message_routes = require('./routes/message');
 var topic_routes = require('./routes/topic');
 var process_routes = require('./routes/process');
 var activity_routes = require('./routes/activity');
-var publication_routes = require('./routes/publication');
+var activitycomment_routes = require('./routes/activitycomment');
 var comment_routes = require('./routes/comment');
 var workflow_routes = require('./routes/workflow');
 
@@ -46,7 +46,7 @@ application.use('/api',message_routes);
 application.use('/api',topic_routes);
 application.use('/api',process_routes);
 application.use('/api',activity_routes);
-application.use('/api',publication_routes);
+application.use('/api',activitycomment_routes);
 application.use('/api',comment_routes);
 application.use('/api',workflow_routes);
 
