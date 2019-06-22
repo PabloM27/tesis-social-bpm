@@ -15,7 +15,8 @@ function createActivityExecutor(req, res) {
         var activityExecutor = new ActivityExecutor();
         activityExecutor.idProcessBPM = params.idProcessBPM;
         activityExecutor.processVersion = params.processVersion;
-        activityExecutor.idActivityBPM = params.idActivityBPM;
+		activityExecutor.idActivityBPM = params.idActivityBPM;
+		activityExecutor.idFormActivity = params.idFormActivity;
         activityExecutor.idCase = params.idCase;
         activityExecutor.type = "USER";
 		activityExecutor.idParticipant = params.idParticipant;
@@ -60,7 +61,8 @@ function updateActivityExecutor(req, res) {
 		activityExecutor._id =params._id;
         activityExecutor.idProcessBPM = params.idProcessBPM;
         activityExecutor.processVersion = params.processVersion;
-        activityExecutor.idActivityBPM = params.idActivityBPM;
+		activityExecutor.idActivityBPM = params.idActivityBPM;
+		activityExecutor.idFormActivity = params.idFormActivity; 
         activityExecutor.idCase = params.idCase;
         activityExecutor.type = "USER";
 		activityExecutor.idParticipant = params.idParticipant;

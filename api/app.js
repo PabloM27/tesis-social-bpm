@@ -28,10 +28,12 @@ application.use(bodyParser.json());
 // le da mas seguridad
 
 application.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin","*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, authorization");
     next();
 })
+
+
 
 //rutas
 application.get('/',(req,res)=>{

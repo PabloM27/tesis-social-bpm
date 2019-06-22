@@ -10,6 +10,7 @@ var ActivityExecutorSchema = Schema({
     idProcessBPM:String,
     processVersion:String,
     idActivityBPM:String,
+    idFormActivity:String,
     idCase:String,
     type:String,
     idParticipant:String,

@@ -14,6 +14,7 @@ export class AppComponent implements OnInit, DoCheck {
   public title:string;
   public identity;
   public url:string;
+  public modalview :boolean;
 
   constructor(
   	private _route: ActivatedRoute,
@@ -21,12 +22,14 @@ export class AppComponent implements OnInit, DoCheck {
   	private _userService: UserService
   	){
   	this.title = 'app social';
-  	this.url = GLOBAL.url;
+    this.url = GLOBAL.url;
+    this.modalview =false;
   }
 
 
   ngOnInit(){
-  	this.identity = this._userService.getIdentity();
+    this.identity = this._userService.getIdentity();
+    //this.viewmode ='modal';
   	//la identidad cacheada es 
   	//console.log(this.identity)
   }

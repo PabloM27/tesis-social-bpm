@@ -8,9 +8,11 @@ var Schema  = mongoose.Schema;
  */
 var ActivitySchema = Schema({
     idActivityBPM:String,
+    idProcessBPM:String,
+    processVersion:String,
     title:String,
     description:String,
-    publications : [{ type: Schema.Types.ObjectId, ref: 'Publication' }],
+    //publications : [{ type: Schema.Types.ObjectId, ref: 'Publication' }],
     created_at:String,
     updated_at:String
 })

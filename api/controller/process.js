@@ -14,7 +14,7 @@ function createProcess(req, res) {
         process.title = params.title;
         process.description = params.description;
         process.idProcessBPM = params.idProcessBPM;
-		process.idVersionBPM = params.idVersionBPM;
+		process.processVersion = params.processVersion;
 		process.topics = params.topics;
 		
 		//falta validar que no exita mismo id
@@ -30,7 +30,7 @@ function createProcess(req, res) {
 
 /*valida los datos minimos para creacion de mensaje*/
 function validateProcessCreate(p) {
-	return ((p.idProcessBPM && p.idVersionBPM && p.title && p.description ));
+	return ((p.idProcessBPM && p.processVersion && p.title && p.description ));
 }
 
 

@@ -125,15 +125,15 @@ export class ExecutionSelectorComponent implements OnInit {
 			var idActivityBPM = params['idActivityBPM'];
 			var idCase = params['idCase'];
 
-			this.activityExecutor = new ActivityExecutor('', idProcessBPM, processVersion, idActivityBPM, idCase, 'USER', '','','');
-			//console.log(this.activityExecutor);
+			this.activityExecutor = new ActivityExecutor('', idProcessBPM, processVersion, idActivityBPM,'', idCase, 'USER', '','','');
+			console.log(this.activityExecutor);
 			this._workflowService.getActivityExecutor(this.activityExecutor).subscribe(
 				response => {
 					if (response) {
 						//console.log("el activity executor leido es");
 						this.activityExecutor = new ActivityExecutor
 							(response._id, response.idProcessBPM,
-								response.processVersion, response.idActivityBPM,
+								response.processVersion, response.idActivityBPM,response.idFormActivity,
 								response.idCase, response.type, response.idParticipant,'','');
 						//console.log(this.activityExecutor);
 						this.selectedUser = this.activityExecutor.idParticipant;

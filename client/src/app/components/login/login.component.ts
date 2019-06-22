@@ -31,25 +31,15 @@ export class LoginComponent implements OnInit{
 	}
 
 	onSubmit(){
-		//logear
-		//console.log(this.user);
 		this._userService.signup(this.user).subscribe(
 			response=>{
-				console.log('usuario logeado con exito');
-				console.log(response);
 				this.identity = response.readUser;
 				if(!this.identity || !this.identity._id ){
 					this.status = 'error';
 				}else{
-					
-					//persistir datos del usuario
-					localStorage.setItem('identity',JSON.stringify(this.identity));
-
-					//conseguir el token
+					//pera persistir datos del usuario en localStorage falta conseguir el token
 					this.getToken();
 				}
-				
-
 			},
 			error =>{
 				var errorMessage =<any>error;
@@ -59,6 +49,8 @@ export class LoginComponent implements OnInit{
 				}
 			})
 	}
+
+	
 
 	getToken(){
 
@@ -70,13 +62,16 @@ export class LoginComponent implements OnInit{
 				if(this.token.length <= 0){
 					this.status = 'error';
 				}else{
-					
+					//si no persisto los datos del user y el token en simultaneo 
+					//puedo tener problemas por falta se sincronizacion , al estar identity y no el token
+					//persistir datos del usuario				
+					localStorage.setItem('identity',JSON.stringify(this.identity));
 					//persistir token del usuario
+					console.log("se guarda el token del usuer"+this.token)
 					localStorage.setItem('token',this.token);
-
 					//conseguir las estadisticas del usr
 					//this.getCounters();
-					//recien cuando ejecuto esto , el componente pasa a estado succes
+					//recien cuando ejecuto esto , el componente pasa a estado success
 					localStorage.setItem('stats',JSON.stringify(response));
 					this.status = 'success'
 					this._router.navigate(['/']);
@@ -100,7 +95,6 @@ export class LoginComponent implements OnInit{
 				//recien cuando ejecuto esto , el componente pasa a estado succes
 				this.status = 'success'
 				this._router.navigate(['/']);
-				
 			},
 			error =>{
 				console.log(<any>error);

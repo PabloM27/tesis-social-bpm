@@ -97,12 +97,15 @@ export class UserService{
 	/*Lee a todos los por nro de pagina */
 	getUsers(page = null):Observable<any>{
 		let headers =  new HttpHeaders().set('Content-Type','application/json').set('Authorization',this.getToken());
-
 		return this._http.get(this.url+'users/'+page,{headers:headers});
 	}
 
 	getUser(id):Observable<any>{
+		console.log("llamara a get User");
 		let headers =  new HttpHeaders().set('Content-Type','application/json').set('Authorization',this.getToken());
+		var ruta = this.url+'user/'+id;
+		console.log(ruta);
+		console.log(this.getToken());
 		return this._http.get(this.url+'user/'+id,{headers:headers});
 	}
 

@@ -15,7 +15,7 @@ var md_auth = require('../middelwares/authenticated');
 api.get('/home', UserController.home);
 api.post('/register', UserController.saveUser);
 api.post('/login', UserController.loginUser);
-api.get('/user/:id', UserController.readUser);
+api.get('/user/:id',md_auth.ensureAuth,UserController.readUser); 
 api.get('/users/:page?', UserController.readUsers);
 api.get('/users-all/', UserController.readAllUsers);
 module.exports = api;

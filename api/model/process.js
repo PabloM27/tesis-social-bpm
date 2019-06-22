@@ -8,7 +8,7 @@ var Schema  = mongoose.Schema;
  */
 var ProcessSchema = Schema({
     idProcessBPM:String,
-    idVersionBPM:String,
+    processVersion:String,
     title:String,
     description:String,
     topics : [{ type: Schema.Types.ObjectId, ref: 'Topic' }],

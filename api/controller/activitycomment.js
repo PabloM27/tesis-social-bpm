@@ -13,9 +13,9 @@ function createActivitycomment(req, res) {
         var activitycomment = new Activitycomment();
         activitycomment.text = params.text;
 		activitycomment.emitter = params.emitter;
-		activitycomment.process = params.process;
-		activitycomment.activity = params.activity;
-        activitycomment.hashtags = params.hashtags;
+		activitycomment.idProcessBPM = params.idProcessBPM;
+		activitycomment.idActivityBPM = params.idActivityBPM;
+		activitycomment.hashtags = params.hashtags;
 		//creo la publicaicon
 	    doCreateActivitycomment({ activitycomment: activitycomment, params: params, res: res });
 			
@@ -56,8 +56,9 @@ function getActivitycomments(req,res){
 
 	var idProcess = req.params.idProcess;
 	var idActivity= req.params.idActivity;
-	console.log(""+idProcess+idActivity);
-	Activitycomment.find({process:idProcess, activity:idActivity}).populate('emitter').exec((err, activitycommentStored)=>{
+	//console.log("proceso"+idProcess);
+	//console.log("actvidad"+idActivity);
+	Activitycomment.find({idActivityBPM:idActivity,idProcessBPM:idProcess}).populate('emitter').exec((err, activitycommentStored)=>{
 		if (err) return res.status(500).send({ message: 'error saving activitycomment' });
 		if (activitycommentStored) {
 			console.log("info enviada");

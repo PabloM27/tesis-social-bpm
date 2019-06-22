@@ -20,3 +20,7 @@
     color: #ccc;
     margin-bottom: 5px;
 }
+
+.comment-input {
+    width: 100% !important;
+}

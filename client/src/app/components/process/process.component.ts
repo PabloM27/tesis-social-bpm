@@ -24,6 +24,8 @@ export class ProcessComponent implements OnInit {
 	@Output() eventEmmiterProcess = new EventEmitter();
 	@Input() idProcess;
 	constructor(
+		private _route: ActivatedRoute,
+		private _router: Router,
 		private _userService: UserService,
 		private _processService: ProcessService,
 	) {
@@ -43,30 +45,27 @@ export class ProcessComponent implements OnInit {
 	}
 
 	getProcess() {
-			var idProcess = "5a98ecb6-2029-4ce4-9dc0-25227aa1b030";//this.idProcess;
-			console.log("parametros" + idProcess)
-			//console.log(params);
-			/*if(!params['idprocess']){
-					idProcess = "5c959adbb9a09c23c083c1e7";
-			}*/
-			console.log("el ide es" + idProcess);
+		this._route.params.subscribe(params => {
+			var idProcess = params['idprocess'];
 
+			//console.log("el ide leido en la url es " + idProcess);
 			this._processService.getProcess(idProcess).subscribe(
 				response => {
 					if (response.process) {
-						console.log("el proceso leido es");
-						console.log(response.process);
+						//console.log("el proceso leido es");
+						//console.log(response.process);
 						this.process = response.process;
 						this.eventEmmiterProcess.emit({ readProcess: this.process });
 					} else {
 						this.status = 'error';
-						console.log("errorrrr");
+						console.log("error" + <any>response);
 					}
 				},
 				error => {
-					console.log("errorrrr2");
+					console.log("error");
 					console.log(<any>error);
 				}
 			)
+		})
 	}
 }

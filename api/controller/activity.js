@@ -9,7 +9,9 @@ function createActivity(req, res) {
 	var params = req.body;
 	if (validateActiviyCreate(params)) {
         var activity = new Activity();
-        activity.idActivityBPM = params.idActivityBPM;
+		activity.idActivityBPM = params.idActivityBPM;
+		activity.idProcessBPM = params.idProcessBPM;
+		activity.processVersion = params.processVersion;
         activity.title = params.title;
         activity.description = params.description; 
         //falta validar que no exita mismo id
@@ -25,7 +27,7 @@ function createActivity(req, res) {
 
 /*valida los datos minimos para creacion de mensaje*/
 function validateActiviyCreate(p) {
-	return ((p.idActivityBPM && p.title  && p.description ));
+	return ((p.idActivityBPM && p.idProcessBPM && p.processVersion && p.title  && p.description ));
 }
 
 

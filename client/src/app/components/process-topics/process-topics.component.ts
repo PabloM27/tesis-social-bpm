@@ -39,8 +39,8 @@ export class ProcessTopicsComponent implements OnInit {
 	}
 
   ngOnInit() {
-    console.log("process.componenet ha sido cargadooo");
-    //this.loadSession();
+    console.log("process-topic.componenet ha sido cargado");
+    //console.log("el id del proceso?"+this.idProcess);
   }
 
   /*
@@ -52,12 +52,12 @@ export class ProcessTopicsComponent implements OnInit {
   }
 
   showTopic(idTopic){
-    console.log("el topico leido es "+idTopic);
+    //console.log("el topico leido es "+idTopic);
     this.selectedTopic = idTopic;
     //si tenemos este id de topic instanciamos
     //componente de topic-message
   }
-  backList(){
+  backTopicList(){
     this.selectedTopic="";
   }
   

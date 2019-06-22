@@ -68,7 +68,6 @@ function readComments(req, res) {
     console.log("busca por : " + topicID);
     Comment.find({ topic: topicID }).populate('emitter').exec((err, data) => {
         if (err) return res.status(500).send({ message: 'Error en la peticion' });
-
         if (!data) return res.status(404).send({ message: 'No existen comentarios' })
         return res.status(200).send({ comments: data });
     })

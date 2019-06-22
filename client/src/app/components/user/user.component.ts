@@ -39,6 +39,7 @@ export class UserComponent implements OnInit{
 	}
 
 	getUser(){
+		console.log("el identity id ")
 		this._userService.getUser(this.identity._id).subscribe(
 			response =>{
 				if(response.user){

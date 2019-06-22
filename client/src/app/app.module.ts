@@ -1,16 +1,16 @@
-//hola julio
-//hola juluo222
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { routing, appRoutingProviders } from './app.routing';
 import { MomentModule } from 'angular2-moment';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { createCustomElement } from '@angular/elements';
-import {APP_BASE_HREF} from '@angular/common';
+//agrego julio import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//agrego julio import { createCustomElement } from '@angular/elements';
+//agrego julio import {APP_BASE_HREF} from '@angular/common';
 
 //componenets
+import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/user/user.component';
 import { ProcessComponent } from './components/process/process.component';
@@ -24,10 +24,8 @@ import { CommentComponent } from './components/comment/comment.component';
 import { ExecutionSelectorComponent } from './components/execution-selector/execution-selector.component';
 import { ActivitycommentComponent } from './components/activitycomment/activitycomment.component';
 import { InfoUserComponent } from './components/info-user/info-user.component';
-
 //angular material
 import { MaterialModule } from './material.module';
-import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [   
@@ -51,26 +49,26 @@ import { AppComponent } from './app.component';
     routing,
     HttpClientModule,
     MomentModule,
-    BrowserAnimationsModule,
+    //BrowserAnimationsModule,
     MaterialModule  
   ],
-  /*providers: [appRoutingProviders, UserService],*/
-  providers: [{provide: APP_BASE_HREF, useValue : '/' }],
-  entryComponents: [ActivitycommentComponent,ProcessTopicsComponent,AppComponent]
+  providers: [appRoutingProviders, UserService],
+  bootstrap: [AppComponent]
+  //agrego julio providers: [{provide: APP_BASE_HREF, useValue : '/' }],
+  //agrego julio entryComponents: [ActivitycommentComponent,ProcessTopicsComponent,AppComponent]
 })
 export class AppModule {
 
-  constructor(private injector: Injector) { }
+  /*constructor(private injector: Injector) { }
 
   ngDoBootstrap() {
-    const el = createCustomElement(ProcessTopicsComponent,{ injector: this.injector });
-    customElements.define('app-process-topics', el);
+    const processTopicsComponent = createCustomElement(ProcessTopicsComponent,{ injector: this.injector });
+    customElements.define('app-process-topics', processTopicsComponent);
 
-    const el2 = createCustomElement(ActivitycommentComponent,{ injector: this.injector });
-    customElements.define('app-activitycomment', el2);
-/*
-    const el3 = createCustomElement(AppComponent,{ injector: this.injector });
-    customElements.define('app-root', el3);*/
-  }
+    const activitycommentComponent = createCustomElement(ActivitycommentComponent,{ injector: this.injector });
+    customElements.define('app-activitycomment', activitycommentComponent);
+    
+    
+}*/
  
 }
