@@ -22,7 +22,7 @@ import { ProcessTopicsComponent } from './components/process-topics/process-topi
 import { TopicCommentsComponent } from './components/topic-comments/topic-comments.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { ExecutionSelectorComponent } from './components/execution-selector/execution-selector.component';
-import { ActivitycommentsComponent } from './components/activitycomment/activitycomments.component';
+import { ActivitycommentsComponent } from './components/activitycomments/activitycomments.component';
 import { InfoUserComponent } from './components/info-user/info-user.component';
 //angular material
 import { MaterialModule } from './material.module';
