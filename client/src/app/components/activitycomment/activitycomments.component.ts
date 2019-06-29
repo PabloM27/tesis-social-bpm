@@ -7,11 +7,11 @@ import { ActivitycommentService } from '../../services/activitycomment.service';
 import { ActivityComment } from 'src/app/models/activityComment';
 @Component({
   selector: 'app-activitycomment',
-  templateUrl: './activitycomment.component.html',
+  templateUrl: './activitycomments.component.html',
   styleUrls: ['../../../styles.css', './activitycomment.component.css'],
   providers: [UserService, ActivitycommentService]
 })
-export class ActivitycommentComponent implements OnInit {
+export class ActivitycommentsComponent implements OnInit {
   public idProcess: string = '5c91928d2f09871f0413654e';
   public idActivity: string = '5c91928d2f09871f0413654e';
 
@@ -22,6 +22,7 @@ export class ActivitycommentComponent implements OnInit {
   public url;
   public comments = [];
   public commentText: string;
+  public commentTextForView: string;
 
   constructor(
     private _route: ActivatedRoute,
@@ -72,11 +73,12 @@ export class ActivitycommentComponent implements OnInit {
 
   addComment() {
 
-
-
-
     if (this.validateComment()) {
-      var xActCom = new ActivityComment('', this.commentText, null,this.idProcess,'',this.idActivity, '', '', this.identity._id, '');
+
+      //analizar texto y crear hashtags
+      var hashtagsArray =this.getHashTags(this.commentText);
+     
+      var xActCom = new ActivityComment('', this.commentText, hashtagsArray,this.idProcess,'',this.idActivity, '', '', this.identity._id, '');
       this._activitycommentService.addActivityComment(xActCom).subscribe(
         response => {
           if (response.activitycomment) {
@@ -101,4 +103,17 @@ export class ActivitycommentComponent implements OnInit {
   validateComment() {
     return (this.commentText != '');
   }
+
+
+   getHashTags(inputText) {  
+    var regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
+    var matches = [];
+    var match;
+
+    while ((match = regex.exec(inputText))) {
+        matches.push(match[1]);
+    }
+
+    return matches;
+}
 }

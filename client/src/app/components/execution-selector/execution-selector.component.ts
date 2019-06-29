@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from '../../models/user';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 import { ActivityExecutor } from '../../models/activityExecutor';
-
+import {FormControl} from '@angular/forms';
 import { WorkflowService } from '../../services/workflow.service';
 import { UserService } from '../../services/user.service';
 
@@ -28,6 +30,7 @@ export class ExecutionSelectorComponent implements OnInit {
 	public selectedUser: string;
 	//execution data
 	public activityExecutor: ActivityExecutor;
+	public notity : boolean;
 
 	constructor(
 		private _route: ActivatedRoute,
@@ -39,6 +42,7 @@ export class ExecutionSelectorComponent implements OnInit {
 		this.identity = this._userService.getIdentity();
 		this.token = this._userService.getToken();
 		this.url = GLOBAL.url;
+		this.notity = false;
 	}
 
 	ngOnInit() {
@@ -46,7 +50,10 @@ export class ExecutionSelectorComponent implements OnInit {
 		this.loadAllUser();
 		//lee si existe configuracion para la actividad en curso
 		this.loadExecutionData();
+
+	
 	}
+
 
 	loadAllUser() {
 		this._userService.getAllUsers().subscribe(
@@ -55,6 +62,7 @@ export class ExecutionSelectorComponent implements OnInit {
 					this.status = 'error';
 				} else {	
 					this.users = response.users;	
+					
 				}
 			},
 			error => {
@@ -83,6 +91,7 @@ export class ExecutionSelectorComponent implements OnInit {
 			//crea
 			this.createExecutor();
 		}
+		this.notity = true;
 	}
 
 	updateExecutor() {

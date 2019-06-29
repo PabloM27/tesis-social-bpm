@@ -1,11 +1,22 @@
-<div class="col-lg-4 form-group">
-    <label *ngIf="!selectedUser">Selecciona ejecutor</label>
-    <label *ngIf="selectedUser">Ejecutor seleccionado</label>
-    <select class="form-control" [(ngModel)]="selectedUser" (change)="updateUser()">
-          <option *ngFor="let user of users" [ngValue]="user.nick">{{user.email}}</option>
-      </select>
+    <div><h4>Seleecione Participante</h4></div>
+    <div class="col-xs-9 ">
+            <mat-form-field>
+                    <mat-label *ngIf="!selectedUser" >Seleccionar participante</mat-label>
+                    <mat-label *ngIf="selectedUser" >Participante seleccionado</mat-label>
+                    <mat-select [(ngModel)]="selectedUser" (change)="updateUser()" >
+                        <mat-option *ngFor="let user of users" [value]="user.nick">
+                        {{user.email}}
+                        </mat-option>
+                    </mat-select>
+            </mat-form-field>
+          
+    </div>
+    <div class="col-xs-3 ">
+            <button mat-raised-button color="primary" (click)="setExecutor()">Aceptar</button>
+    </div>
     <br>
-    <p><input type="submit" value="Confirmar" class="btn btn-success" (click)="setExecutor()" /></p>
-
-</div>
+    <label *ngIf="notity" class="alert alert-success" style="padding-top:5%">
+            Participante modificado
+    </label>
+   
 <div class="clearfix"></div>

@@ -17,6 +17,7 @@
 
 .contentCommentsAct {
     height: 70px;
+    margin-top: 19px !important;
 }
 
 .textarea-comment {
@@ -33,4 +34,17 @@ mat-form-field {
 
 mat-form-field textarea {
     height: 35px;
+}
+
+
+.tagsinput {
+    width: 50%;
+    background-color: #fff;
+    /*border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);*/
+    display: inline-block;
+    /*color: #555;
+    vertical-align: middle;
+    border-radius: 4px;*/
+
 }

@@ -1,5 +1,5 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div class="navigation col-lg-12"   >
+<!--The content below is only a placeholder and can be replaced !--*ngIf="modalview".-->
+<div class="navigation col-lg-12"     >
     <nav class="navbar navbar-default" >
       <div class="container-fluid">
         <div class="navbar-header">
@@ -33,10 +33,11 @@
         </ul> 
       </div>
     </nav>
-  <div *ngIf="!identity">
+  
+</div>
+<div *ngIf="!identity">
     <login></login>
-  </div>
-
+</div>
 <div *ngIf="identity">
   <router-outlet></router-outlet>
 </div>

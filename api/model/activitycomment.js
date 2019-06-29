@@ -11,7 +11,7 @@ var Schema = mongoose.Schema;
  */
 var ActivitycommentSchema = Schema({
     text: String,
-    hashtags: [{ type: Schema.Types.ObjectId, ref: 'Hashtag' }],
+    hashtags: [String],
     emitter: { type: Schema.ObjectId, ref: 'User' },
     idProcessBPM:String,
     processVersion:String,

@@ -12,6 +12,7 @@ function createHashtag(req, res) {
 	if (validateHashtagCreate(params)) {
 		var hashtag = new HashTag();
 		hashtag.text = params.text;
+		hashtag.style = params.style;
 		//validacion de existencia de hashtag
 		HashTag.find({
 			$or: [

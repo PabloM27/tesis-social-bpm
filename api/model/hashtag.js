@@ -10,6 +10,7 @@ var Schema  = mongoose.Schema;
  */
 var HashtagSchema = Schema({
     text:String,
+    style:String,
     created_at:String
 })
 
