@@ -1,0 +1,55 @@
+.img-user {
+    float: left;
+    position: relative;
+}
+
+.comment {
+    float: left;
+    position: relative;
+    padding: 10px;
+    background-color: #eee;
+    margin-left: 10px;
+    height: 55px;
+    font-size: 12px;
+    width: calc(100% - 50px);
+    border-radius: 5px;
+}
+
+.contentCommentsAct {
+    height: 70px;
+    margin-top: 19px !important;
+}
+
+.textarea-comment {
+    padding: 5px;
+    width: 100%;
+    height: 60px;
+    border-radius: 5px;
+    border: 1px solid #ccc
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-form-field textarea {
+    height: 35px;
+}
+
+
+.tagsinput {
+    width: 50%;
+    background-color: #fff;
+    /*border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);*/
+    display: inline-block;
+    /*color: #555;
+    vertical-align: middle;
+    border-radius: 4px;*/
+
+}
+.hash_tag {
+    background-color: #5bc0de;
+    color:red !important;
+}  
+

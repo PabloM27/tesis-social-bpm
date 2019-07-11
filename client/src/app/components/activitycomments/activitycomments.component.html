@@ -11,24 +11,9 @@
 
                 <div class="modal-body" style="padding-bottom:2%">
 
-                   <!-- <div *ngFor="let comment of comments">
-                        <app-comment *ngIf="comment" [comment_object]="comment"></app-comment>
-                    </div>-->
-                    <div *ngFor="let comment of comments" class="contentCommentsAct">
-                        <div class="img-user">
-                            <app-info-user [user]="comment.emitter"></app-info-user>
-                        </div>
-                        <div class="comment">
-                            <div class="date-comment">{{comment.text}}</div>
-                            <div class="text-comment">{{comment.create}}</div>
-                        </div>
-                        <br>
-                        <div class="tagsinput" *ngIf="comment.hashtags" style="padding-left: 50px"  >
-                            <span *ngFor=" let hashtag of comment.hashtags" class="tag label label-info" style="padding-left: 2%"># {{hashtag}}</span>
-                        </div>
-                        
+                   <div *ngFor="let comment of comments">
+                        <app-activity-comment *ngIf="comment" [activitycomment_object]="comment" ></app-activity-comment>
                     </div>
-
                 </div>
                 <div class="modal-footer" >
                     <div>

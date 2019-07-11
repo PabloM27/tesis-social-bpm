@@ -6,7 +6,7 @@ import { UserService } from '../../services/user.service';
 import { ActivitycommentService } from '../../services/activitycomment.service';
 import { ActivityComment } from 'src/app/models/activityComment';
 @Component({
-  selector: 'app-activitycomment',
+  selector: 'app-activitycomments',
   templateUrl: './activitycomments.component.html',
   styleUrls: ['../../../styles.css', './activitycomment.component.css'],
   providers: [UserService, ActivitycommentService]

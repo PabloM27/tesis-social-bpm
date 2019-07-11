@@ -23,9 +23,11 @@ import { TopicCommentsComponent } from './components/topic-comments/topic-commen
 import { CommentComponent } from './components/comment/comment.component';
 import { ExecutionSelectorComponent } from './components/execution-selector/execution-selector.component';
 import { ActivitycommentsComponent } from './components/activitycomments/activitycomments.component';
+import { ActivityCommentComponent } from './components/activity-comment/activity-comment.component';
 import { InfoUserComponent } from './components/info-user/info-user.component';
 //angular material
 import { MaterialModule } from './material.module';
+
 
 @NgModule({
   declarations: [   
@@ -39,7 +41,8 @@ import { MaterialModule } from './material.module';
     CommentComponent,
     ExecutionSelectorComponent,
     ActivitycommentsComponent,
-    InfoUserComponent
+    InfoUserComponent,
+    ActivityCommentComponent
   ],
   imports: [
     BrowserModule,

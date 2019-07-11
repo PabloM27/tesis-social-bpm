@@ -37,7 +37,7 @@ export class CommentComponent implements OnInit {
 		this.url = GLOBAL.url;
 	}
   ngOnInit(){
-		console.log("comment.componenet ha sido cargadooo");
+		console.log("comment.componenet ha sido cargado");
 		this.loadCommentData();	
   }
   
