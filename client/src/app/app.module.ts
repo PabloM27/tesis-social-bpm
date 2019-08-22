@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './components/user/user.component';
 import { ProcessComponent } from './components/process/process.component';
 import { TopicComponent } from './components/topic/topic.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 //servicios
 import { UserService } from './services/user.service';
@@ -27,6 +28,9 @@ import { ActivityCommentComponent } from './components/activity-comment/activity
 import { InfoUserComponent } from './components/info-user/info-user.component';
 //angular material
 import { MaterialModule } from './material.module';
+//charts
+import {ChartsModule} from 'ng2-charts';
+
 
 
 @NgModule({
@@ -42,7 +46,8 @@ import { MaterialModule } from './material.module';
     ExecutionSelectorComponent,
     ActivitycommentsComponent,
     InfoUserComponent,
-    ActivityCommentComponent
+    ActivityCommentComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,8 @@ import { MaterialModule } from './material.module';
     HttpClientModule,
     MomentModule,
     //BrowserAnimationsModule,
-    MaterialModule  
+    MaterialModule,
+    ChartsModule  
   ],
   providers: [appRoutingProviders, UserService],
   bootstrap: [AppComponent]

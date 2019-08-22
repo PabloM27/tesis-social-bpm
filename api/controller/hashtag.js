@@ -3,6 +3,7 @@
 //CONTROLADOR DE HASHTAG - SERVICIO DE HASHTAG
 //UserSchema lo da el ORM permit 
 var HashTag = require('../model/hashtag');
+var ActivityComment = require('../model/activitycomment');
 var moment = require('moment');
 
 /*Crea nuevo hashtag*/
@@ -56,10 +57,54 @@ function doCreateHashtag(p) {
 
 }
 
+/*Retorna todos los hashtags*/
+function readAllHashtags(req, res) {
+    //recuperamosa todos,pero no enviamos la pass
+    HashTag.find({}, (err, hashtags) => {
+        if (err) return res.status(500).send({ message: 'Error en la peticion' });
+        if (!hashtags) return res.status(500).send({ message: 'No hay hashtags disponibles' });
+        //llama a funcion asincronica
+        return res.status(200).send({ hashtags });
+    });
+}
+
+/*Retorna la cantidad total de hashtags  */
+function countAllHashtags(req, res) {
+	let count = {error:0,alert:0,info:0,recomendacion:0}
+	ActivityComment.find({ hashtags: "error" }, (err, ActivityComment) => {
+        if (err) return res.status(500).send({ message: 'Error en la peticion' });
+        if (!ActivityComment) return res.status(500).send({ message: 'No hay hashtags disponibles' });
+		//llama a funcion asincronica
+		count.error = ActivityComment.length;
+        return res.status(200).send({ count });
+    });
+}
+
+/*Retorna la cantidad total de hashtags  */
+function countHashtags(req, res) {
+	let count = 0;
+	var hashtag ="none";
+	console.log(req.params);
+	if (req.params.hashtag) {
+        hashtag = req.params.hashtag;
+	}
+	ActivityComment.find({ hashtags: hashtag}, (err, ActivityComment) => {
+        if (err) return res.status(500).send({ message: 'Error en la peticion' });
+        if (!ActivityComment) return res.status(500).send({ message: 'No hay hashtags disponibles' });
+		//llama a funcion asincronica
+		count = ActivityComment.length;
+        return res.status(200).send({ count });
+    });
+}
+
+
 
 //publico las funciones del controlador
 module.exports = {
-	createHashtag
+	createHashtag,
+	readAllHashtags,
+	countHashtags,
+	countAllHashtags
 }
 
 

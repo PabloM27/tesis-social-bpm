@@ -9,6 +9,8 @@ import { ProcessComponent } from './components/process/process.component';
 import { ProcessTopicsComponent } from './components/process-topics/process-topics.component';
 import { ExecutionSelectorComponent } from './components/execution-selector/execution-selector.component';
 import { ActivitycommentsComponent } from './components/activitycomments/activitycomments.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
 
 const appRoutes: Routes = [
 {path:'login',component:LoginComponent},
@@ -17,6 +19,7 @@ const appRoutes: Routes = [
 {path:'activitycomment',component:ActivitycommentsComponent},
 {path:'activitycomment/:idProcessBPM/:idActivityBPM',component:ActivitycommentsComponent},
 {path:'execution-selector/:idProcessBPM/:processVersion/:idActivityBPM/:idCase',component:ExecutionSelectorComponent},
+{path:'dashboard',component:DashboardComponent},
 ];
 
 export const appRoutingProviders: any [] = [];
