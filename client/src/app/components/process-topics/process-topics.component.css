@@ -1,9 +1,52 @@
+.createTopic {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    border-radius: 50%;
+    padding: 2.5px 15px;
+    background-color: #36a7c4;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.content-relative-topic {
+    position: relative;
+}
+
+.cont-btntopico {
+    display: none;
+}
+
+.content-topic:hover~.cont-btntopico {
+    display: block;
+}
+
+.cont-form-topic {
+    display: flex;
+    flex-direction: column;
+}
+
+.cont-form-topic>*:not(.btnback) {
+    width: 100%;
+}
+
+.textarea-topic {
+    width: 100%
+}
+
 .modal-body {
     height: calc(100% - 60px) !important;
 }
 
 .cont-btntopico {
     float: right;
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    cursor: pointer;
+    z-index: 1000;
 }
 
 .btnback {
@@ -11,8 +54,8 @@
     right: 5px;
 }
 
-.iframeclass{
-z-index: 2147483000;
+.iframeclass {
+    z-index: 2147483000;
     position: fixed;
     bottom: 20px;
     right: 20px;

@@ -39,11 +39,15 @@ export class UserComponent implements OnInit{
 	}
 
 	getUser(){
-		console.log("el identity id ")
+		console.log("el identity id ++++")
 		this._userService.getUser(this.identity._id).subscribe(
 			response =>{
 				if(response.user){
 					this.user = response.user;
+					console.log(this.user);
+					if(!this.user.image){
+						this.user.image="";
+					}
 				}else{
 					this.status = 'error';
 				}

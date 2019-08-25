@@ -18,7 +18,7 @@ import { User } from '../../models/user';
 })
 export class TopicCommentsComponent implements OnInit {
 
-  @Input() topic_selected_id: string = '';
+  @Input() topic_selected_id: Topic;
   public identity;
   public token;
   public title;
@@ -51,21 +51,9 @@ export class TopicCommentsComponent implements OnInit {
 
   loadTopicSelected() {
     if (this.topic_selected_id) {
-      this._topicService.getTopic(this.topic_selected_id).subscribe(
-        response => {
-          if (response.topic) {
-            console.log("el topico leido en el component");
-            console.log(response.topic);
-            this.topic = response.topic;
-          }
-        },
-        error => {
-          console.log(<any>error);
-
-        }
-      )
-
-      this._commentService.getComments(this.topic_selected_id).subscribe(
+      
+      this.topic = this.topic_selected_id;
+      this._commentService.getComments(this.topic_selected_id._id).subscribe(
         response => {
           if (response.comments) {
             console.log("los comentarios del topico leidos");
@@ -87,7 +75,7 @@ export class TopicCommentsComponent implements OnInit {
     //alert(this.input.value);
 
     if (this.validateComment(this.newTextComment)) {
-      var xComment = new Comment('', this.newTextComment, this.identity._id, this.topic_selected_id, '');
+      var xComment = new Comment('', this.newTextComment, this.identity._id, this.topic_selected_id._id, '');
       this._commentService.createComment(xComment).subscribe(
         response => {
           //console.log(response.comment);

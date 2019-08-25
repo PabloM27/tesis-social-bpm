@@ -1,49 +1,60 @@
 <div>
-     <!--<div class="btn-social text-center" data-toggle="modal" data-target="#myModal2">
-        <i class="glyphicon glyphicon-thumbs-up"></i>
-    </div> -->
 
+    <div *ngIf="!selectedTopic && !createTopic" class="createTopic" (click)="showCreateTopic()">+</div>
 
-    <!-- Modal -->
-    <div class="" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
-        <div class="" role="document">
-            <div class="modal-content">
+    <div class="" role="document">
+        <div class="modal-content">
 
-                <div class="modal-header" style="padding:0px;">
-                    <button type="button" class="close hidden" data-dismiss="modal" aria-label="Close"><span
+            <div class="modal-header" style="padding:0px;">
+                <button type="button" class="close hidden" data-dismiss="modal" aria-label="Close"><span
               aria-hidden="true">&times;</span></button>
-                 <h4 class="modal-title" id="">Topicos </h4>
-                </div>
+                <h4 class="modal-title" id="">Topicos </h4>
+            </div>
 
-                <div class="modal-body">
-                    <div *ngIf="!selectedTopic">
-                        <process [idProcess]="idProcess" (eventEmmiterProcess)="refreshProcessOutPut($event)"></process>
-                        <div *ngIf="process" class="">
-                            <div *ngFor="let topic_id of process.topics">
-                                <div class="cont-btntopico">
-                                    <button class="btn btn-primary" (click)="showTopic(topic_id)">Ver</button>
-                                </div>
-                                <div class="">
-                                    <topic *ngIf="topic_id" [topic_id]="topic_id" [completo]="'false'"></topic>
-                                </div>
-                            </div>
+            <div class="modal-body">
+                <div *ngIf="!selectedTopic && !createTopic">
+
+                    <div class=""></div>
+                    <div class="content-relative-topic" *ngFor="let topic_id of topics">
+
+                        <div class="content-topic">
+                            <topic *ngIf="topic_id" [topic_id]="topic_id" [completo]="'false'"></topic>
+                        </div>
+                        <div class="cont-btntopico">
+                            <button class="btn btn-primary" (click)="showTopic(topic_id)">Ver</button>
                         </div>
                     </div>
-                    <div *ngIf="selectedTopic">
-                        <button class="btn btn-primary btnback" (click)="backTopicList()">Volver</button>
-                        <app-topic-comments *ngIf="selectedTopic" [topic_selected_id]="selectedTopic"></app-topic-comments>
-                    </div>
-                    <div class="clearfix"></div>
 
                 </div>
+                <div *ngIf="selectedTopic">
+                    <button class="btn btn-primary btnback" (click)="backTopicList()">Volver</button>
+                    <app-topic-comments *ngIf="selectedTopic" [topic_selected_id]="selectedTopic"></app-topic-comments>
+                </div>
+                <div *ngIf="createTopic">
 
+
+                    <div class="cont-form-topic">
+                        <button class="btn btn-primary btnback" (click)="backTopicList()">Volver</button>
+                        <mat-form-field appearance="standard">
+                            <input matInput class="input-topic" placeholder="Titulo" [(ngModel)]="topicTitle">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+
+                            <textarea matInput class="textarea-topic" placeholder="Escribir topico" [(ngModel)]="topicText"></textarea>
+                        </mat-form-field>
+
+                        <button mat-raised-button color="primary" (click)="addTopic()">Aceptar</button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
 
             </div>
-            <!-- modal-content -->
+
+
         </div>
-        <!-- modal-dialog -->
+        <!-- modal-content -->
     </div>
-    <!-- modal -->
+    <!-- modal-dialog -->
 
 
 </div>

@@ -28,9 +28,11 @@ import { ActivityCommentComponent } from './components/activity-comment/activity
 import { InfoUserComponent } from './components/info-user/info-user.component';
 //angular material
 import { MaterialModule } from './material.module';
+
 //charts
 import {ChartsModule} from 'ng2-charts';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -56,9 +58,10 @@ import {ChartsModule} from 'ng2-charts';
     routing,
     HttpClientModule,
     MomentModule,
-    //BrowserAnimationsModule,
     MaterialModule,
-    ChartsModule  
+    ChartsModule ,
+
+    BrowserAnimationsModule  
   ],
   providers: [appRoutingProviders, UserService],
   bootstrap: [AppComponent]

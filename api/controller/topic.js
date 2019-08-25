@@ -13,8 +13,9 @@ function createTopic(req, res) {
         var topic = new Topic();
         topic.title = params.title;
         topic.description = params.description;
+        topic.process = params.process;
         topic.owner = params.owner;
-        topic.comments = params.comments;
+        //topic.comments = params.comments;
         //faltan crear los msj del topico
         doCreateTopic({ topic: topic, params: params, res: res });
 
@@ -28,7 +29,7 @@ function createTopic(req, res) {
 
 /*valida los datos minimos para creacion de mensaje*/
 function validateTopicCreate(p) {
-    return (p.title && p.description && p.owner);
+    return (p.title && p.description && p.process);
 }
 
 
@@ -80,7 +81,7 @@ function readTopicFull(req, res) {
 
 /*Lee los topicos paginados */
 /*Retorna usuarios paginados */
-
+/*
 function readTopics(req, res) {
 
     var page = 1;
@@ -100,7 +101,20 @@ function readTopics(req, res) {
             pages: Math.ceil(total / itemsPerPage)
         });
     });
+}*/
+
+function readTopics(req, res) {
+    var xIdProcess = req.params.idProcess;
+
+    Topic.find({ process: xIdProcess }).populate('owner').exec((err, topicRead) => {
+        if (err) return res.status(500).send({ message: 'Error en la peticion' });
+
+        if (!topicRead) return res.status(404).send({ message: 'El topico no existe' });
+        console.log(topicRead);
+        return res.status(200).send({ topics: topicRead });
+    })
 }
+
 
 //publico las funciones del controlador
 module.exports = {

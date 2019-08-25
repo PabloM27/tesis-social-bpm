@@ -130,7 +130,7 @@ function loginUser(req, res) {
 
 function readUser(req, res) {
     var userId = req.params.id;
-
+    console.log("user.js " + userId);
     User.findById(userId, (err, userRead) => {
         if (err) return res.status(500).send({ message: 'Error en la peticion' });
 

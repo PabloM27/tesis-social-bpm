@@ -1,4 +1,4 @@
-<div >
+<div>
 
     <!-- Modal -->
     <div class="" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
@@ -11,18 +11,18 @@
 
                 <div class="modal-body" style="padding-bottom:2%">
 
-                   <div *ngFor="let comment of comments">
-                        <app-activity-comment *ngIf="comment" [activitycomment_object]="comment" ></app-activity-comment>
+                    <div class="comments" *ngFor="let comment of comments">
+                        <app-activity-comment *ngIf="comment" [activitycomment_object]="comment"></app-activity-comment>
                     </div>
                 </div>
-                <div class="modal-footer" >
+                <div class="modal-footer">
                     <div>
                         <mat-form-field>
-                            <textarea matInput class="" placeholder="Escribir comentario" [(ngModel)]="commentText" ></textarea>
+                            <textarea matInput class="" placeholder="Escribir comentario" [(ngModel)]="commentText"></textarea>
                         </mat-form-field>
                         <button mat-raised-button color="primary" (click)="addComment()">Aceptar</button>
                     </div>
-                </div> 
+                </div>
             </div>
             <!-- modal-content -->
         </div>

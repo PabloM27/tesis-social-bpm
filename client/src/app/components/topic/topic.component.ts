@@ -15,7 +15,7 @@ import {GLOBAL} from '../../services/global';
 
 export class TopicComponent implements OnInit{
 
-	@Input() topic_id: string = '';
+	@Input() topic_id: Topic;
 	@Input() public completo: string;
 
 	public user:User;
@@ -41,7 +41,7 @@ export class TopicComponent implements OnInit{
 
 	ngOnInit(){
 		console.log("topic.component ha sido cargadooo");
-		console.log("me llego el id al topico "+this.topic_id+ " - "+ this.completo );
+		console.log("me llego el id al topico "+this.topic_id._id+ " - "+ this.completo );
 		this.loadTopicData();	
 	}
 
@@ -50,7 +50,8 @@ export class TopicComponent implements OnInit{
 	}
 
 	getTopic(){
-		this._topicService.getTopic(this.topic_id).subscribe(
+		this.topic = this.topic_id;
+		/*this._topicService.getTopic(this.topic_id).subscribe(
 			response =>{
 				if(response.topic){
                     console.log("el topico leido es");
@@ -64,7 +65,7 @@ export class TopicComponent implements OnInit{
 				console.log(<any>error);
 				//this._router.navigate(['/']);
 			}
-		)
+		)*/
 
 	}
 }

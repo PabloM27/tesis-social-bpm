@@ -31,7 +31,18 @@ export class TopicService{
 		return this._http.get(this.url+'topic/'+id,{headers:headers});
 	}
 
+	createTopic(topic):Observable<any>{
+		let params = JSON.stringify(topic);
+
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		return this._http.post(this.url + 'topic', params, { headers: headers });
+	}
 	
-	
+	getTopics(idProcess):Observable<any>{
+
+		//http://localhost:3800/api/process/5c7d78dda22f2a0f14fc2a2c
+			let headers =  new HttpHeaders().set('Content-Type','application/json');
+			return this._http.get(this.url+'topics/'+idProcess,{headers:headers});
+		}
     
 }

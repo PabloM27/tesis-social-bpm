@@ -1,8 +1,7 @@
-
 const context_properties = {
-                "APP_NAME":"BPM-SOCIAL",
-                "DB_NAME":"bpm_social_2",
-                "APP_PORT":"3800"
-                }
+    "APP_NAME": "BPM-SOCIAL",
+    "DB_NAME": "bpm_social",
+    "APP_PORT": "3800"
+}
 
 module.exports = context_properties;
