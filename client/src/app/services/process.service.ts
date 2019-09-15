@@ -18,12 +18,22 @@ export class ProcessService{
 	}
 
 	getProcess(id):Observable<any>{
-		console.log(id);
+		//console.log(id);
         //http://localhost:3800/api/process/5c7d78dda22f2a0f14fc2a2c
-
 		let headers =  new HttpHeaders().set('Content-Type','application/json');
-
 		return this._http.get(this.url+'process/'+id,{headers:headers});
-    }
+	}
+	
+
+	/*
+	Recupera el total de los hashtags por proceso
+	Sumariza las comentarios que tenga determinado 
+	hashtag y retorna json con totales
+	 */
+	getProcessHashtagsCount(id):Observable<any>{
+		let headers =  new HttpHeaders().set('Content-Type','application/json');
+		return this._http.get(this.url+'hashtags-process/'+id,{headers:headers});
+	}
+		
     
 }

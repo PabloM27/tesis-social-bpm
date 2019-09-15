@@ -19,7 +19,7 @@ const appRoutes: Routes = [
 {path:'activitycomment',component:ActivitycommentsComponent},
 {path:'activitycomment/:idProcessBPM/:idActivityBPM',component:ActivitycommentsComponent},
 {path:'execution-selector/:idProcessBPM/:processVersion/:idActivityBPM/:idCase',component:ExecutionSelectorComponent},
-{path:'dashboard',component:DashboardComponent},
+{path:'dashboard/:idProcessBPM',component:DashboardComponent},
 ];
 
 export const appRoutingProviders: any [] = [];

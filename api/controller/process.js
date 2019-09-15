@@ -57,6 +57,7 @@ function doCreateProcess(p) {
 function readProcess(req, res) {
     var processId = req.params.id;
     console.log(processId);
+    console.log("esta leyendo");
     Process.findOne({ idProcessBPM: processId }, (err, processRead) => {
         console.log(processRead);
         if (err) {

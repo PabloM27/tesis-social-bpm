@@ -69,16 +69,41 @@ function readAllHashtags(req, res) {
 }
 
 /*Retorna la cantidad total de hashtags  */
-function countAllHashtags(req, res) {
-	let count = {error:0,alert:0,info:0,recomendacion:0}
-	ActivityComment.find({ hashtags: "error" }, (err, ActivityComment) => {
-        if (err) return res.status(500).send({ message: 'Error en la peticion' });
-        if (!ActivityComment) return res.status(500).send({ message: 'No hay hashtags disponibles' });
-		//llama a funcion asincronica
-		count.error = ActivityComment.length;
-        return res.status(200).send({ count });
-    });
+async function countAllHashtags(req, res) {
+	let idProcessBPM ="";
+	console.log(req.idProcessBPM);
+	if (req.params.idProcessBPM) {
+        idProcessBPM = req.params.idProcessBPM;
+	}
+	let count = {error:0,alerta:0,info:0,recomendacion:0}
+	//podria mejorarse con un Promise.all y que se lean en paralelo
+	// tambien mongoose puede tener algun metodo para hacer un count 
+	// en una sola consulta
+	count.error = await countHashtagsSync({hashtagType:"error",idProcessBPM:idProcessBPM}); 
+	count.alerta = await countHashtagsSync({hashtagType:"alerta",idProcessBPM:idProcessBPM}); 
+	count.info = await countHashtagsSync({hashtagType:"info",idProcessBPM:idProcessBPM}); 
+	count.recomendacion = await countHashtagsSync({hashtagType:"recomendacion",idProcessBPM:idProcessBPM}); 
+	res.status(200).send({ count });
 }
+
+async function countHashtagsSync( params) {
+	let count = 0;
+	
+	await ActivityComment.find({ hashtags: params.hashtagType ,idProcessBPM:params.idProcessBPM }, (err, ActivityComment) => {
+		if (err) {
+			console.log("error de en lectura hashtag " +params.hashtagType);
+			count = -1;
+		}
+		if (!ActivityComment){
+			console.log("no hay hashtags disponibles" +params.hashtagType);
+			count = 0;
+		}
+		count = ActivityComment.length;
+		console.log("finalizo lectura de hastag " +params.hashtagType);
+		return 
+	});
+	return count;
+}	
 
 /*Retorna la cantidad total de hashtags  */
 function countHashtags(req, res) {

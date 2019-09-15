@@ -11,7 +11,7 @@ var ProcessSchema = Schema({
     processVersion:String,
     title:String,
     description:String,
-    topics : [{ type: Schema.Types.ObjectId, ref: 'Topic' }],
+    //topics : [{ type: Schema.Types.ObjectId, ref: 'Topic' }],
     created_at:String,
     updated_at:String
     //faltaria agregar un estado

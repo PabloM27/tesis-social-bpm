@@ -9,7 +9,7 @@ var api = express.Router();
 
 api.post('/hashtag',HashtagController.createHashtag); 
 api.get('/hashtags',HashtagController.readAllHashtags);
-api.get('/hashtags-count',HashtagController.countAllHashtags);
+api.get('/hashtags-process/:idProcessBPM?',HashtagController.countAllHashtags);
 api.get('/hashtags-count/:hashtag?', HashtagController.countHashtags);
 
 
