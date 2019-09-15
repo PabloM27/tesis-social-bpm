@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {  Component, AfterViewInit, ElementRef, ViewChild,OnInit ,Renderer2 } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from '../../models/user';
 import { GLOBAL } from '../../services/global';
 import { UserService } from '../../services/user.service';
 import { ActivitycommentService } from '../../services/activitycomment.service';
 import { ActivityComment } from 'src/app/models/activityComment';
+import { HashtagService } from '../../services/hashtag.service';
+
 @Component({
   selector: 'app-activitycomments',
   templateUrl: './activitycomments.component.html',
   styleUrls: ['../../../styles.css', './activitycomment.component.css'],
-  providers: [UserService, ActivitycommentService]
+  providers: [UserService, ActivitycommentService, HashtagService]
 })
-export class ActivitycommentsComponent implements OnInit {
+export class ActivitycommentsComponent implements AfterViewInit  {
   public idProcess: string = '5c91928d2f09871f0413654e';
   public idActivity: string = '5c91928d2f09871f0413654e';
 
@@ -21,23 +23,36 @@ export class ActivitycommentsComponent implements OnInit {
   public token;
   public url;
   public comments = [];
-  public commentText: string;
+  public commentText;
   public commentTextForView: string;
+  public textCopy;
+  public spanPosition;
+
+  public bottomTag;
+  public leftTag;
+  public showTag = false;
+  public hashtags;
+
+  @ViewChild("spanPosition",{static: false}) elementPosition: ElementRef;
+  @ViewChild("dropTag",{static: false}) dropTag: ElementRef;
+  @ViewChild("textareaComment",{static: false}) textareaComment: ElementRef;
+  @ViewChild("modalcomments",{static: false}) modalcomments: ElementRef;
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _userService: UserService,
     private _activitycommentService: ActivitycommentService,
+    private _hashtagService: HashtagService,
+    private renderer: Renderer2
   ) {
     this.title = 'Comentarios de Actividad';
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.url = GLOBAL.url;
-    this.commentText;
   }
-  ngOnInit() {
-
+  ngAfterViewInit() {
+    
 
     console.log("activitycomment.componenet ha sido cargadooo");
 
@@ -68,7 +83,21 @@ export class ActivitycommentsComponent implements OnInit {
       error => {
         console.log(<any>error);
       }
-    )
+    );
+
+    this._hashtagService.getHashtags().subscribe(
+      response => {
+        console.log("hasshhh");
+        console.log(response.hashtags);
+        if (response.hashtags) {
+          this.hashtags = response.hashtags;
+        }
+      },
+      error => {
+        console.log(<any>error);
+      }
+    );
+    
   }
 
   addComment() {
@@ -87,7 +116,9 @@ export class ActivitycommentsComponent implements OnInit {
             // agregarlo a la lista
             this.comments.push(response.activitycomment);
             this.commentText = "";
-
+            // posicion de scroll
+            setTimeout(()=>{ this.modalcomments.nativeElement.scrollTop = 99999999; },1)
+            ;
           } else {
             console.log("error creando comentario");
           }
@@ -116,4 +147,44 @@ export class ActivitycommentsComponent implements OnInit {
 
     return matches;
 }
+
+
+  keyText(pcommentText,event){
+    var xTexto = event.originalTarget.value;
+    var lastChar = pcommentText[event.target.selectionEnd-1];
+    this.textCopy = xTexto.substring(0,event.target.selectionEnd-1).replace(/\r?\n/g, '<br>');
+    //console.log(this.elementPosition);
+    console.log(event);
+    this.showTag = false;
+    if(lastChar == "#"){
+      this.leftTag = this.elementPosition.nativeElement.offsetLeft;
+      if(event.target.scrollTop == 0){
+        this.bottomTag = 90 ;
+      }else{
+        this.bottomTag = 80 ;
+      }
+      
+      this.showTag = true;
+    }else {
+      this.showTag = false;
+    }
+
+  }
+
+  setTag(pHashtag){
+    var textAnt = this.textareaComment.nativeElement.value.substring(0,this.textareaComment.nativeElement.selectionEnd);
+    var textDesp = this.textareaComment.nativeElement.value.substring(this.textareaComment.nativeElement.selectionEnd,this.textareaComment.nativeElement.textLength);
+    this.commentText = textAnt+pHashtag+" "+textDesp;
+    this.showTag = false;
+  }
+
+  findChoices(searchText: string) {
+    return ['John', 'Jane', 'Jonny'].filter(item =>
+      item.toLowerCase().includes(searchText.toLowerCase())
+    );
+  }
+
+  getChoiceLabel(choice: string) {
+    return `#${choice} `;
+  }
 }

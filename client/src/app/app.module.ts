@@ -29,11 +29,15 @@ import { InfoUserComponent } from './components/info-user/info-user.component';
 //angular material
 import { MaterialModule } from './material.module';
 
+import { polyfill as keyboardEventKeyPolyfill } from 'keyboardevent-key-polyfill';
+import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
+
 //charts
 import {ChartsModule} from 'ng2-charts';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+keyboardEventKeyPolyfill();
 
 @NgModule({
   declarations: [   
@@ -60,7 +64,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MomentModule,
     MaterialModule,
     ChartsModule ,
-
+    TextInputAutocompleteModule,
     BrowserAnimationsModule  
   ],
   providers: [appRoutingProviders, UserService],

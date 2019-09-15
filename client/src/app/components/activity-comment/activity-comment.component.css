@@ -3,6 +3,15 @@
     position: relative;
 }
 
+.date-comment {
+    float: right;
+    font-size: 9px;
+    color: #aeaeae;
+    position: relative;
+    top: -6px;
+    right: -3px;
+}
+
 .comment {
     float: left;
     position: relative;
@@ -36,7 +45,6 @@ mat-form-field textarea {
     height: 35px;
 }
 
-
 .tagsinput {
     width: 50%;
     background-color: #fff;
@@ -46,10 +54,9 @@ mat-form-field textarea {
     /*color: #555;
     vertical-align: middle;
     border-radius: 4px;*/
-
 }
+
 .hash_tag {
     background-color: #5bc0de;
-    color:red !important;
-}  
-
+    color: red !important;
+}
