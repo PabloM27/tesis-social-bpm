@@ -1,6 +1,5 @@
 ignore.js
 node_modules/
 /api/node_modules/
-api/node_modules/content-disposition/LICENSE
 api/node_modules/*
-api/node_modules/content-disposition/LICENSE
+
