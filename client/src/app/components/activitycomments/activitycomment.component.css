@@ -39,6 +39,47 @@ mat-form-field {
     width: 100%;
 }
 
+.divClone {
+    width: 466px;
+    text-align: left;
+    position: absolute;
+    color: #fff;
+    height: 0px;
+    overflow: auto;
+}
+
+#spanPosition {
+    position: relative;
+}
+
+.dropdownTag {
+    position: absolute;
+    padding: 6px;
+    background-color: #fff;
+    z-index: 1;
+    border-radius: 5px;
+    font-size: 12px;
+    min-width: 120px;
+    text-align: left;
+    font-weight: bold;
+    border: 0;
+    box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
+    border: 0px solid #000;
+}
+
+.dropdownTag div {
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.dropdownTag div:hover {
+    background-color: #eee;
+}
+
+.content-comment {
+    position: relative;
+}
+
 mat-form-field textarea {
     height: 35px;
 }
@@ -52,4 +93,21 @@ mat-form-field textarea {
     /*color: #555;
     vertical-align: middle;
     border-radius: 4px;*/
+}
+
+.modal-content {
+    position: relative;
+    box-shadow: none;
+}
+
+.modal-body {
+    padding-bottom: 2%;
+    height: 76%;
+    position: fixed;
+}
+
+.modal-footer {
+    width: 100%;
+    position: fixed;
+    top: 80%;
 }

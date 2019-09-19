@@ -3,6 +3,15 @@
     position: relative;
 }
 
+.date-comment {
+    float: right;
+    font-size: 9px;
+    color: #aeaeae;
+    position: relative;
+    top: -6px;
+    right: -3px;
+}
+
 .comment {
     float: left;
     position: relative;

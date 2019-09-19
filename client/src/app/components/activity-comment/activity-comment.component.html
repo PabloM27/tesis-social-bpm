@@ -1,12 +1,12 @@
 <div style="padding-bottom: 5%">
-  <div class="img-user">
-      <app-info-user [user]="activityComment.emitter"></app-info-user>
-  </div>
-  <div class="comment">
-      <div class="date-comment" [innerHTML]='commentTextForView'></div>
-      <div class="text-comment">{{activityComment.create}}</div>
-  </div>
-   <!-- <div class="tagsinput" *ngIf="activityComment.hashtags" style="padding-left: 50px"  >
+    <div class="img-user">
+        <app-info-user [user]="activityComment.emitter"></app-info-user>
+    </div>
+    <div class="comment">
+        <div class="date-comment">{{ (activityComment.created_at | amFromUnix) | amLocale:'es' | amTimeAgo}}</div>
+        <div class="text-comment" [innerHTML]='commentTextForView'></div>
+    </div>
+    <!-- <div class="tagsinput" *ngIf="activityComment.hashtags" style="padding-left: 50px"  >
       <span *ngFor=" let hashtag of activityComment.hashtags" class="tag label label-info" style="padding-left: 2%"># {{hashtag}}</span>
   </div> -->
 </div>
