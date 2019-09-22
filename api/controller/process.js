@@ -3,6 +3,7 @@
 //CONTROLADOR DE Proceso - SERVICIO DE Proceso
 
 var Process = require('../model/process');
+var Activity = require('../model/activity');
 var moment = require('moment');
 
 /*Crea nuevo proceso*/
@@ -83,10 +84,28 @@ function readProcessById(req, res) {
     })
 }
 
+/*Lee todas las actividades de un proceso */
+function readAllProcessActivities(req, res) {
+    var processId = req.params.id;
+
+    Activity.find({idProcessBPM:processId,processVersion:"1"},(err, actitiesStored)=>{
+        if (err) return res.status(500).send({ message: 'error recuperando actividades' });
+        if (!actitiesStored) {
+            res.status(404).send({ message: 'error recuperando actividades' });
+        } else {
+            console.log("info enviada");
+            res.status(200).send({ activities: actitiesStored });
+        }
+    })
+}
+
+
+
 
 
 //publico las funciones del controlador
 module.exports = {
     createProcess,
-    readProcess
+    readProcess,
+    readAllProcessActivities
 }

@@ -34,6 +34,15 @@ export class ProcessService{
 		let headers =  new HttpHeaders().set('Content-Type','application/json');
 		return this._http.get(this.url+'hashtags-process/'+id,{headers:headers});
 	}
+
+	/*
+	Recupera el total de los actividades por proceso
+	 */
+	getProcessActivities(id):Observable<any>{
+		http://localhost:3800/api/process/process/activities
+		let headers =  new HttpHeaders().set('Content-Type','application/json');
+		return this._http.get(this.url+'process/'+id+'/activities/',{headers:headers});
+	}
 		
     
 }

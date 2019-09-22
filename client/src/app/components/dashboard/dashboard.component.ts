@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProcessService } from '../../services/process.service';
+import { ActivityService } from '../../services/activity.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  providers:[ProcessService]
+  providers:[ProcessService,ActivityService]
 })
 
 
@@ -15,13 +16,16 @@ export class DashboardComponent implements OnInit {
   title = 'Graficos';
   public idProcessBPM="";
   public hashtagsCounters;
+  public lsActivities;
+  public activitiesMap = new Map();
+  public activitiesMapIndex = new Map();
 
   /* PIE */
   public pieChartLabels:string[] = ["#error", "#info", "#alerta", "#recomendacion"];
-  public pieChartData:number[] = [21, 39, 10, 14];
+  public pieChartData:number[] = [0, 0, 0, 0];
   public pieChartType:string = 'pie';
   public pieChartOptions:any = {'backgroundColor': [
-               "#FF6384",
+            "#FF6384",
             "#FFCE56",
             "#4BC0C0",
             "#E7E9ED",
@@ -45,11 +49,10 @@ export class DashboardComponent implements OnInit {
   public barChartLegend = true;
 
   public barChartData = [
-    {data: [10, 10, 15, 10, 40], label: '#Errores'},
-    {data: [4, 5, 8, 6, 10], label: '#Info'},
-    {data: [10, 12, 30, 20, 50], label: '#Alertas'},
-    {data: [2, 4, 6, 8, 10], label: '#Recomendaciones'},
-   
+    {data: [0, 0, 0, 0, 0, 0 ,0,0], label: '#Errores'},
+    {data: [0, 0, 0, 0, 0, 0 ,0,0], label: '#Info'},
+    {data: [0, 0, 0, 0, 0, 0 ,0,0], label: '#Alertas'},
+    {data: [0, 0, 0, 0, 0, 0 ,0,0], label: '#Recomendaciones'},
   ];
 
 
@@ -59,6 +62,7 @@ export class DashboardComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _processService: ProcessService,
+    private _activityService: ActivityService,
   ) {
    
   }
@@ -71,6 +75,7 @@ export class DashboardComponent implements OnInit {
       this.idProcessBPM = params['idProcessBPM'];
       console.log("tabler del proceso:" + this.idProcessBPM);
       this.loadTotalHashtags();
+      this.loadActivitiesBars();
 
     })
   }
@@ -78,6 +83,19 @@ export class DashboardComponent implements OnInit {
   // events on slice click
   public chartClicked(e:any):void {
     console.log(e);
+    if (e.active.length > 0) {
+      const chart = e.active[0]._chart;
+      const activePoints = chart.getElementAtEvent(e.event);
+      if ( activePoints.length > 0) {
+       // get the internal index of slice in pie chart
+       const clickedElementIndex = activePoints[0]._index;
+       const label = chart.data.labels[clickedElementIndex];
+       // get value by index
+       const value = chart.data.datasets[0].data[clickedElementIndex];
+       console.log(clickedElementIndex, label, value)
+       //RECUPERAMOS LA ACTIVIDAD HAY QUE LLAMAR AL SERVICIO Y MOSTRAR LOS MENSAJES
+      }
+     }
   }
  
  // event on pie chart slice hover
@@ -93,7 +111,7 @@ export class DashboardComponent implements OnInit {
         //console.log("recupero hashtags");
         //console.log(response.process);
         this.hashtagsCounters = response.count;
-        console.log( this.hashtagsCounters);
+        //console.log( this.hashtagsCounters);
         this.pieChartData = [this.hashtagsCounters.error,this.hashtagsCounters.info,this.hashtagsCounters.alerta,this.hashtagsCounters.recomendacion];
     
       } else {
@@ -108,6 +126,91 @@ export class DashboardComponent implements OnInit {
     return null;
   }
 
-  
+  public loadActivitiesBars(){
+    //console.log("el ide leido en la url es " + idProcess);
+    this._processService.getProcessActivities(this.idProcessBPM).subscribe(
+      response => {
+        if (response.activities) {
+          this.lsActivities = response.activities
+          let i = 0;
+          let arrayOfActiviLabels =this.barChartLabels;
+          this.lsActivities.forEach(function(element) {
+            arrayOfActiviLabels[i] = element.title;
+            i++;
+          });
+          this.loadActivitiesBarCounters();  //loadActivitiesBarCounters
+        } else {
+          console.log("error cargando total de hashtags" + <any>response);
+        }
+      },
+      error => {
+        console.log("error");
+        console.log(<any>error);
+      }
+    )
+    return null;
+  }
+
+
+  public loadActivitiesBarCounters(){
+    var $this =this;
+    let i=0;
+    let barChartDataAux = [
+      {data: [0, 0, 0, 0, 0, 0, 0, 0], label: '#Errores'},
+      {data: [0, 0, 0, 0, 0, 0, 0, 0], label: '#Info'},
+      {data: [0, 0, 0, 0, 0, 0, 0, 0], label: '#Alertas'},
+      {data: [0, 0, 0, 0, 0, 0, 0, 0], label: '#Recomendaciones'},
+    ];
+
+    this.lsActivities.forEach(function(element) {
+      //console.log("id actividad" +element.idActivityBPM);
+      $this.activitiesMap.set(element.idActivityBPM,i);
+      $this.activitiesMapIndex.set(i,element.idActivityBPM); 
+      i++; 
+    });
+
+    this.lecturaPuntual($this,barChartDataAux,0)
+    //espera a la carga de la matriz y la asigna para que se vea en grafico
+    setTimeout(function() {
+      $this.barChartData  = barChartDataAux; 
+    }, 2000);
+  }
+
+  public lecturaPuntual( $this ,barChartDataAux,xPos ){
+    let xIdActivity = $this.activitiesMapIndex.get(xPos);
+    if(xPos<=7){
+      $this._activityService.getActivityHashtagsCounters(xIdActivity,xPos).subscribe(
+        response => {
+          if (response.activityCounters) {
+            let idActivityBPM = response.activityCounters.idActivityBPM; 
+            let xCounters = response.activityCounters.counters 
+            console.log("actividad "+idActivityBPM);
+            console.log(xCounters);
+            barChartDataAux[0].data[$this.activitiesMap.get(idActivityBPM)] = xCounters.error;
+            barChartDataAux[1].data[$this.activitiesMap.get(idActivityBPM)] = xCounters.info;
+            barChartDataAux[2].data[$this.activitiesMap.get(idActivityBPM)] = xCounters.alerta;
+            barChartDataAux[3].data[$this.activitiesMap.get(idActivityBPM)] = xCounters.recomendacion;
+            xPos++
+            $this.lecturaPuntual($this,barChartDataAux,xPos);     
+         
+          } else {
+            console.log("error cargando total de hashtags" + <any>response);
+          }
+        },
+        error => {
+          console.log("error");
+          console.log(<any>error);
+        }
+      )
+      
+    }else{
+      return;
+    }
+   
+  }
+
 
 }
+
+
+
