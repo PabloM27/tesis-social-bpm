@@ -1,4 +1,4 @@
-import {  Component, AfterViewInit, ElementRef, ViewChild,OnInit ,Renderer2 } from '@angular/core';
+import {  Component, AfterViewInit, ElementRef, ViewChild,OnInit ,Renderer2,Input ,OnChanges} from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from '../../models/user';
 import { GLOBAL } from '../../services/global';
@@ -13,9 +13,11 @@ import { HashtagService } from '../../services/hashtag.service';
   styleUrls: ['../../../styles.css', './activitycomment.component.css'],
   providers: [UserService, ActivitycommentService, HashtagService]
 })
-export class ActivitycommentsComponent implements AfterViewInit  {
-  public idProcess: string = '5c91928d2f09871f0413654e';
-  public idActivity: string = '5c91928d2f09871f0413654e';
+export class ActivitycommentsComponent implements AfterViewInit ,OnChanges  {
+
+  
+  public idProcess: string = '';
+  public idActivity: string = '';
 
   // @ViewChild('comment_') inputComment: ElementRef;
   public title;
@@ -32,6 +34,10 @@ export class ActivitycommentsComponent implements AfterViewInit  {
   public leftTag;
   public showTag = false;
   public hashtags;
+  //show mode solo permite listar los mensajes de una actividad
+  @Input() showMode: false;
+  @Input() showPorcessId: string;
+  @Input() showActivityId: string;
 
   @ViewChild("spanPosition",{static: false}) elementPosition: ElementRef;
   @ViewChild("dropTag",{static: false}) dropTag: ElementRef;
@@ -57,8 +63,15 @@ export class ActivitycommentsComponent implements AfterViewInit  {
     console.log("activitycomment.componenet ha sido cargadooo");
 
     this._route.params.subscribe(params => {
+      // si son nulos los tengo que recuperar de los otros parametros
       this.idProcess = params['idProcessBPM'];
       this.idActivity = params['idActivityBPM'];
+      if(this.showMode){
+        //los parametros llegan por Input
+        this.idProcess = this.showPorcessId;
+        this.idActivity = this.showActivityId;
+
+      }
 
       console.log("llego process" + this.idProcess);
       console.log("llego act" + this.idActivity);
@@ -186,5 +199,10 @@ export class ActivitycommentsComponent implements AfterViewInit  {
 
   getChoiceLabel(choice: string) {
     return `#${choice} `;
+  }
+
+  /*Metodo ante cambio de datos de inputs */
+  ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
+    this.ngAfterViewInit();
   }
 }

@@ -1,38 +1,52 @@
 
 <h2 class="text-center">Tablero de Control</h2>
 <div class="container">
-  <div class="col-sm-4 text-center">
-    <h3 class="text-center">Hashtags totales</h3>
-    <canvas baseChart
-          [data]="pieChartData"
-          [labels]="pieChartLabels"
-          [chartType]="pieChartType"
-          [options]="pieChartOptions"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
-    </div>
-    <div class="col-sm-4 text-center" style="display:none">
-      <h3 class="text-center">Hashtag principal en Actividad</h3>
-      <canvas baseChart
-            [data]="doughnutChartData"
-            [labels]="doughnutChartLabels"
-            [chartType]="doughnutChartType"></canvas>
-    </div>
-    <div class="col-sm-10 text-center">
-        <h3 class="text-center">Hashtags por Actividad</h3>
-      <canvas baseChart
-            [datasets]="barChartData"
-            [labels]="barChartLabels"
-            [options]="barChartOptions"
-            [legend]="barChartLegend"
-            [chartType]="barChartType"
-            (chartClick)="chartClicked($event)"></canvas>
-    </div>
-
-    
+  
+ 
 </div>
 <div class="container">
 </div>
 
+<mat-tab-group>
+  <mat-tab label="Hashtags totales">
+      <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">trending_up</mat-icon>
+          Hashtags totales
+        </ng-template>
+    <div class="col-sm-12 text-center">
+      <h3 class="text-center">Hashtags totales</h3>
+      <div>
+        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+          [options]="pieChartOptions" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      </div>
+      <div class="col-sm-4 text-center" style="display:none">
+        <h3 class="text-center">Hashtag principal en Actividad</h3>
+        <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
+          [chartType]="doughnutChartType"></canvas>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Hashtags por Actividad">
+      <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">trending_up</mat-icon>
+          Hashtags por Actividad
+        </ng-template>
+    <div class="col-sm-8 text-center" >
+      <h3 class="text-center">Hashtags por Actividad</h3>
+      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+        [legend]="barChartLegend" [chartType]="barChartType" (chartClick)="chartClicked($event)"></canvas>
+    </div>
+    <div  *ngIf="showComments" class="col-sm-4 text-center">
+      <div>
+          <app-activitycomments [showMode]="true" [showPorcessId]="idProcessBPM" [showActivityId]="activityToShowComments" ></app-activitycomments>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Usuarios destacados">  
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">supervised_user_circle</mat-icon>
+      Usuarios destacados
+    </ng-template>Usuarios destacados </mat-tab>
+</mat-tab-group>
 
   

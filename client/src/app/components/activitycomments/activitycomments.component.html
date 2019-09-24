@@ -15,7 +15,7 @@
                     <app-activity-comment *ngIf="comment" [activitycomment_object]="comment"></app-activity-comment>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" *ngIf="!showMode">
                 <div class="content-comment">
                     <div *ngIf="showTag" [style.bottom.px]="bottomTag" [style.left.px]="leftTag" class="dropdownTag" #dropTag>
                         <div *ngFor="let hashtag of hashtags" (click)="setTag(hashtag.text)">

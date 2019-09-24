@@ -105,7 +105,7 @@ async function countHashtagsSync( params) {
  * posiblemente tenga que ir en otro servicio como activityComents
  */
 
-async function getMessagesByHashtag(req, res) {
+async function getCommentsByHashtag(req, res) {
 	let idActivityBPM ="";
 	let hashtagType ="";
 	//console.log(req.idActivityBPM);
@@ -130,5 +130,5 @@ async function getMessagesByHashtag(req, res) {
 module.exports = {
 	createActivity,
 	getHastagCounters,
-	getMessagesByHashtag
+	getCommentsByHashtag
 }

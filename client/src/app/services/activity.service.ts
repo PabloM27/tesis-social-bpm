@@ -28,4 +28,18 @@ export class ActivityService {
 		return result;
 	}
 
+	/**
+	 * Lee todos los comentarios de 
+	 * determinada actividad que contentan 
+	 * determinado hashtag
+	 * @param p 
+	 */
+	getActivityCommentsByHashtag(p): Observable<any> {
+		let idActivityBPM = p.idActivityBPM
+		let hashtag = p.hashtag;
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		let result = this._http.get(this.url + 'activity/'+idActivityBPM+'/activitie-comments/'+hashtag, { headers: headers });
+		return result;
+	}
+
 }

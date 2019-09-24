@@ -9,6 +9,6 @@ var api = express.Router();
 
 api.post('/activity',ActivityController.createActivity);  
 api.get('/activity/:idActivityBPM?/counters/',ActivityController.getHastagCounters);
-api.get('/activity/:idActivityBPM/activities/:hashtag',ActivityController.getMessagesByHashtag);
+api.get('/activity/:idActivityBPM/activitie-comments/:hashtag',ActivityController.getCommentsByHashtag);
 
 module.exports = api;

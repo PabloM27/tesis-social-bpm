@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProcessService } from '../../services/process.service';
 import { ActivityService } from '../../services/activity.service';
@@ -19,6 +19,10 @@ export class DashboardComponent implements OnInit {
   public lsActivities;
   public activitiesMap = new Map();
   public activitiesMapIndex = new Map();
+
+  //indican que se selecciono actividad para ver mensajes
+  public showComments = false;
+  public activityToShowComments;
 
   /* PIE */
   public pieChartLabels:string[] = ["#error", "#info", "#alerta", "#recomendacion"];
@@ -93,7 +97,9 @@ export class DashboardComponent implements OnInit {
        // get value by index
        const value = chart.data.datasets[0].data[clickedElementIndex];
        console.log(clickedElementIndex, label, value)
-       //RECUPERAMOS LA ACTIVIDAD HAY QUE LLAMAR AL SERVICIO Y MOSTRAR LOS MENSAJES
+       this.activityToShowComments = this.activitiesMapIndex.get(clickedElementIndex);
+       this.showComments = false;
+       this.showComments = true;
       }
      }
   }
@@ -209,8 +215,8 @@ export class DashboardComponent implements OnInit {
    
   }
 
-
 }
+
 
 
 
