@@ -4,10 +4,11 @@
 
 var express = require('express');
 var CommentController = require('../controller/comment');
+var md_auth = require('../middelwares/authenticated');
 
 var api = express.Router();
 
-api.post('/comment',CommentController.createComment);  
-api.get('/comment/:id',CommentController.readComment);  
-api.get('/comments/:id',CommentController.readComments);  
+api.post('/comment',md_auth.ensureAuth, CommentController.createComment);  
+api.get('/comment/:id',md_auth.ensureAuth, CommentController.readComment);  
+api.get('/comments/:id',md_auth.ensureAuth, CommentController.readComments);  
 module.exports = api;

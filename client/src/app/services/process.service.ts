@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-//import {Process} from '../models/process';
+import {UserService} from '../services/user.service';
 import {GLOBAL} from './global';
 
 //indicamos que va a ser injectado en otra clase, el ser injectable 
@@ -20,7 +20,7 @@ export class ProcessService{
 	getProcess(id):Observable<any>{
 		//console.log(id);
         //http://localhost:3800/api/process/5c7d78dda22f2a0f14fc2a2c
-		let headers =  new HttpHeaders().set('Content-Type','application/json');
+		let headers =  new HttpHeaders().set('Content-Type','application/json').set('Authorization',UserService.getToken());
 		return this._http.get(this.url+'process/'+id,{headers:headers});
 	}
 	
@@ -31,7 +31,7 @@ export class ProcessService{
 	hashtag y retorna json con totales
 	 */
 	getProcessHashtagsCount(id):Observable<any>{
-		let headers =  new HttpHeaders().set('Content-Type','application/json');
+		let headers =  new HttpHeaders().set('Content-Type','application/json').set('Authorization',UserService.getToken());
 		return this._http.get(this.url+'hashtags-process/'+id,{headers:headers});
 	}
 
@@ -40,7 +40,7 @@ export class ProcessService{
 	 */
 	getProcessActivities(id):Observable<any>{
 		http://localhost:3800/api/process/process/activities
-		let headers =  new HttpHeaders().set('Content-Type','application/json');
+		let headers =  new HttpHeaders().set('Content-Type','application/json').set('Authorization',UserService.getToken());
 		return this._http.get(this.url+'process/'+id+'/activities/',{headers:headers});
 	}
 		

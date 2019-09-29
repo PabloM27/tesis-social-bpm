@@ -4,13 +4,14 @@
 
 var express = require('express');
 var HashtagController = require('../controller/hashtag');
+var md_auth = require('../middelwares/authenticated');
 
 var api = express.Router();
 
-api.post('/hashtag',HashtagController.createHashtag); 
-api.get('/hashtags',HashtagController.readAllHashtags);
-api.get('/hashtags-process/:idProcessBPM?',HashtagController.countAllHashtags);
-api.get('/hashtags-count/:hashtag?', HashtagController.countHashtags);
+api.post('/hashtag',md_auth.ensureAuth,HashtagController.createHashtag); 
+api.get('/hashtags',md_auth.ensureAuth,HashtagController.readAllHashtags);
+api.get('/hashtags-process/:idProcessBPM?',md_auth.ensureAuth,HashtagController.countAllHashtags);
+api.get('/hashtags-count/:hashtag?', md_auth.ensureAuth,HashtagController.countHashtags);
 
 
 module.exports = api;

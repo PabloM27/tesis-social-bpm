@@ -4,10 +4,10 @@
 
 var express = require('express');
 var ActivitycommentController = require('../controller/activitycomment');
-
+var md_auth = require('../middelwares/authenticated');
 var api = express.Router();
 
-api.post('/activitycomment',ActivitycommentController.createActivitycomment);  
-api.get('/activitycomments/:idProcess/:idActivity',ActivitycommentController.getActivitycomments);  
+api.post('/activitycomment',md_auth.ensureAuth,ActivitycommentController.createActivitycomment);  
+api.get('/activitycomments/:idProcess/:idActivity',md_auth.ensureAuth,ActivitycommentController.getActivitycomments);  
 
 module.exports = api;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from './global';
-
+import {UserService} from '../services/user.service';
 
 @Injectable()
 export class ActivitycommentService {
@@ -16,17 +16,16 @@ export class ActivitycommentService {
 	}
 
 	getActivityComments(idProcess, idActivity): Observable<any> {
-		console.log("entro a service" + idProcess+idActivity);
+		//console.log("entro a service" + idProcess+idActivity);
 		//http://localhost:3800/api/comment/5ca3e1bb77fb7f13f85a1091
-		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+		let headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization',UserService.getToken());
 		return this._http.get(this.url + 'activitycomments/' + idProcess +"/"+idActivity, { headers: headers });
 	}
 
 	addActivityComment(pComment): Observable<any> {
 				let params = JSON.stringify(pComment);
-
 				//http://localhost:3800/api/comment/5ca3e1bb77fb7f13f85a1091
-				let headers = new HttpHeaders().set('Content-Type', 'application/json');
+				let headers = new HttpHeaders().set('Content-Type', 'application/json').set('Authorization',UserService.getToken());
 				return this._http.post(this.url + 'activitycomment', params,{ headers: headers });
 	}
 

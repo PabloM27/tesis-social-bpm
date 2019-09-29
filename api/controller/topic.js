@@ -56,7 +56,6 @@ function doCreateTopic(p) {
 /*Lee Topico */
 function readTopic(req, res) {
     var topicId = req.params.id;
-
     Topic.findOne({ _id: topicId }).populate('owner').exec((err, topicRead) => {
         if (err) return res.status(500).send({ message: 'Error en la peticion' });
 

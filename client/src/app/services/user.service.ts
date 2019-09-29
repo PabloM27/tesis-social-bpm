@@ -60,6 +60,15 @@ export class UserService{
 		return this.token;
 	}
 
+	static getToken(){
+		let token = localStorage.getItem('token');
+		if(token!="undefine"){
+			return  token;
+		}else{
+			return null;
+		}
+	}
+
 	//ojo que cuando sigo a alguien no esta refrescando el localStorage
 	getStats(){
 		let stats = JSON.parse(localStorage.getItem('stats'));
