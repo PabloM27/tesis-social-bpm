@@ -27,7 +27,9 @@ export class ActivityCommentComponent implements OnInit {
 
   formatComment(){
     var string = this.activityComment.text;
-
+    string = string.replace(/(^|\s)(#error+)/ig, "$1<span class='tag label label-danger ng-star-inserted'>#error</span>");
+    string = string.replace(/(^|\s)(#alerta+)/ig, "$1<span class='tag label label-warning ng-star-inserted'>#alerta</span>");
+    string = string.replace(/(^|\s)(#recomendacion+)/ig, "$1<span class='tag label label-default ng-star-inserted'>#recomendacion</span>");
     string = string.replace(/(^|\s)(#[a-z\d-]+)/ig, "$1<span class='tag label label-info ng-star-inserted'>$2</span>");
 
     this.commentTextForView =string;
